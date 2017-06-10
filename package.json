@@ -1,0 +1,51 @@
+{
+  "name": "react-with-babel-gulp-and-browserify",
+  "version": "1.0.0",
+  "description": "Starter pack repository for projects with ReactJS, Babel, Gulp and Browserify",
+  "main": "server.js",
+  "scripts": {
+    "build": "gulp build",
+    "watch": "gulp watch",
+    "try-last-react": "./try-with-last-react-version.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artemdemo/react-with-babel-gulp-and-browserify.git"
+  },
+  "author": "Valentyn Koval",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "https://github.com/artemdemo/react-with-babel-gulp-and-browserify#readme",
+  "devDependencies": {
+    "babel-core": "^6.3.26",
+    "babel-plugin-transform-class-properties": "^6.3.13",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browser-sync": "^2.18.12",
+    "browserify": "^12.0.1",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-util": "^3.0.7",
+    "history": "^1.17.0",
+    "react": "^0.14.5",
+    "react-dom": "^0.14.5",
+    "react-router": "^1.0.3",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "express-ejs-layouts": "^2.3.0",
+    "react": "^0.14.9",
+    "react-dom": "^0.14.9",
+    "react-redux": "^5.0.5",
+    "react-router": "^1.0.3",
+    "redux": "^3.6.0",
+    "redux-oauth": "^2.0.5",
+    "redux-thunk": "^2.2.0"
+  }
+}
