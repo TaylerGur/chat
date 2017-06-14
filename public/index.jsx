@@ -1,17 +1,53 @@
 import React      from 'react';
 import ReactDOM   from 'react-dom';
-import App from './components/App';
+import {BrowserRouter as Router, Route , Switch, Link} from 'react-router-dom';
+import {Routes} from './Routes';
 import { Provider } from 'react-redux';
 import configureStore from './redux/configureStore';
 
 
+// console.log(Routes);
+
 const store = configureStore();
 
-const component = (
-  <Provider store={store}>
-    <App/>
-  </Provider>
-);
+ReactDOM.render((
+	<Provider store={store}>
+		{Routes}
+	</Provider> 
 
 
-ReactDOM.render(component, document.getElementById('App'));
+
+	), document.getElementById('App'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const component = (
+
+//     <Router>
+
+//     	<Switch>
+//       		<Route component={App1} path="/about" />
+//     		<Router component={App} path="/contact" />
+
+//     	</Switch>
+//     </Router>
+// );
+
+// ReactDOM.render(component, document.getElementById('App'));

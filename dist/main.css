@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+.auth {
+  padding: 15px;
+  border-radius: 2px;
+  border: 1px solid blue;
+  margin: 0 auto;
+  width: 224px; }
+  .auth .auth_label {
+    width: 70px;
+    display: inline-block;
+    background: red; }
+  .auth input {
+    margin: 5px 0;
+    width: 150px; }
+  .auth input[type='submit'] {
+    width: 50px;
+    text-align: center; }
+  .auth > div {
+    width: 100%; }
