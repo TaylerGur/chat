@@ -1,0 +1,16 @@
+.element_dialogs{
+	height:30px;
+	background-color:gray;
+	border:1px solid white;
+	
+	&_title{
+		margin: 5px 10px;
+		font-size:16px;
+		//color:red;	
+
+	}
+	&:hover{
+		color:red;
+		cursor: pointer;
+	}
+}

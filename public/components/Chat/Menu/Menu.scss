@@ -1,0 +1,15 @@
+.menu{
+	padding: 10px;
+	border:1px solid green;
+	position: relative;
+
+	&_exit{
+		position: absolute;
+		right: 20px;
+	}
+	
+	&_user{
+		position: absolute;
+		left: 20px;
+	}
+}

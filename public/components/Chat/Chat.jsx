@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as Nick from '../../redux/actions/nickNameActions';
+import * as U from '../../redux/actions/userDataActions';
 import {  withRouter} from 'react-router-dom';
 import axios from 'axios';
-import Menu from
+import Menu from './Menu/Menu';
+import Dialogs from './Dialogs/Dialogs';
+import Dialog from './Dialog/Dialog';
 
 class Chat extends Component {
   render() {
@@ -13,7 +15,8 @@ class Chat extends Component {
 		  .then(function (response) {
 		    if(response.data.nameUser && response.data.id){
 		    	// console.log(response.data.nameUser);
-		    	dispatch(Nick.editNickName(response.data.nameUser));
+		    	dispatch(U.editNickName(response.data.nameUser));
+		    	dispatch(U.editId(response.data.id));
 			}
 			else{
 				history.push('/');
@@ -23,24 +26,23 @@ class Chat extends Component {
 		    console.log(error);
 		  });
  	
-  	// console.log(this.props.nickName);
-  	// console.log(this.props);
+  
     return (
-
-        <div>
-         	Chat!!!
-         	<a href="/api/delete_session">Выйти</a>
-         	<br/>
-         	{this.props.nickName}
-        </div>
-       
+    	<div className="chat">
+    	
+			<Menu/>
+        	<div className="chat_content">
+        		<Dialogs/>
+        		<Dialog/>
+        	</div>
+       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
 	return {
-		nickName: state.nickName
+		User: state.userData
 	}
 }
 export default withRouter(connect(mapStateToProps)(Chat));

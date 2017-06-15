@@ -2,6 +2,42 @@
   margin: 0;
   padding: 0; }
 
+.chat {
+  border: 1px solid red;
+  width: 800px;
+  margin: 0 auto;
+  overflow: hidden; }
+  .chat_content {
+    margin-top: 20px;
+    display: flex;
+    height: 550px; }
+
+.dialog {
+  width: 100%;
+  border: 1px solid brown;
+  height: 100%; }
+
+.dialogs {
+  width: 250px;
+  height: 100%;
+  border: 1px solid blue;
+  overflow-y: scroll; }
+
+.menu {
+  padding: 10px;
+  border: 1px solid green;
+  position: relative; }
+  .menu_exit {
+    position: absolute;
+    right: 20px; }
+  .menu_user {
+    position: absolute;
+    left: 20px; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
 .auth {
   padding: 15px;
   border-radius: 2px;
@@ -20,3 +56,19 @@
     text-align: center; }
   .auth > div {
     width: 100%; }
+
+.messages {
+  height: 450px;
+  border: 1px solid blue;
+  overflow-y: scroll; }
+
+.element_dialogs {
+  height: 30px;
+  background-color: gray;
+  border: 1px solid white; }
+  .element_dialogs_title {
+    margin: 5px 10px;
+    font-size: 16px; }
+  .element_dialogs:hover {
+    color: red;
+    cursor: pointer; }

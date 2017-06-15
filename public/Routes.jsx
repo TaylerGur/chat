@@ -10,8 +10,8 @@ export const Routes =
 		  
 			      <Switch>
 			        <Route path="/chat" component={Chat}/>
-			      
-			        <Route path="/" component={Main}/>
+			      	<Route path="/" component={Main}/>
+			        
 
 			      </Switch>
 			 

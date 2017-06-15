@@ -1,0 +1,18 @@
+import { EDIT_NICK, FAIL, EDIT_ID } from '../actions/userDataActions';
+
+const initialState = {id:0, nickName:""};
+
+export default function (state = initialState, action) {
+  switch (action.type) {
+    case EDIT_NICK:
+      state.nickName = action.payloads;
+      return state;
+    case EDIT_ID:
+       state.id = action.payloads;        
+       return state;
+    case FAIL:
+      return state;
+    default: 
+      return state;
+  }
+}

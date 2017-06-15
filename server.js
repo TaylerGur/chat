@@ -28,6 +28,72 @@ app.use(session({
     store: new SessionStore(options_connect),
     resave: false
 }));
+
+
+
+app.post('/api/add_message', jsonParser, function(req, res){
+    console.log(req.body);
+    mysql.query("INSERT IGNORE INTO messages (dialog_id, author_id, text, date) VALUES('" + req.body.dialog_id + "', '" + req.body.author_id +  "', '" + req.body.text +  "', '" + req.body.date +  "')", function(err, result,field){
+   
+        if(err) {
+            console.log('%%%%%%%%ADD_MESSAGE_ERROR%%%%%%%%%');
+            
+        }
+
+        if(result) console.log('add message in database');
+           res.send(true); 
+                        
+        
+       
+    
+    });
+    // res.send(false);
+    
+});
+app.post('/api/get_dialog', jsonParser, function(req, res){
+    mysql.query("SELECT m.text, m.date, u.nickName  FROM messages m INNER JOIN users u ON m.author_id = u.id WHERE dialog_id='" + req.body.id + "' ORDER BY m.date", function(err, result,field){
+   
+        if(err) {
+            console.log('%%%%%%%%GET_DIALOG_ERROR%%%%%%%%%');
+            
+        }
+        if(result && result.length > 0){
+    
+            res.send(result);
+            
+ 
+                        
+        }
+        else{
+            console.log('Cообщений нет!');
+            res.send('Cообщений нет!');  
+        }
+    });
+
+});
+
+
+app.post('/api/get_dialogs', jsonParser, function(req, res){
+    mysql.query("SELECT * FROM dialogs", function(err, result,field){
+   
+        if(err) {
+            console.log('%%%%%%%%GET_DIALOGS_ERROR%%%%%%%%%');
+            
+        }
+        if(result.length > 0){
+    
+            res.send(result);
+            
+ 
+                        
+        }
+        else{
+            console.log('Диалоггов нет!');
+            res.send('Диалоггов нет!');  
+        }
+    });
+
+});
 app.get('/api/delete_session', jsonParser, function(req, res){
 	req.session.destroy();
 	// res.send("сессия удалена");

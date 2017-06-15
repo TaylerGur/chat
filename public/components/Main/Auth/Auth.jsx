@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import { Link} from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import * as Nick from '../../../redux/actions/nickNameActions';
+import * as U from '../../../redux/actions/userDataActions';
 // import createHistory from 'history';
 import {  withRouter} from 'react-router-dom'
 
@@ -25,7 +25,8 @@ class Auth extends Component {
 		  .then(function (response) {
 		    if(response.data.nameUser){
 		    	console.log("dispatch");
-		        dispatch(Nick.editNickName(response.data.nameUser));
+		        dispatch(U.editNickName(response.data.nameUser));
+		        dispatch(U.editId(response.data.idUser));
 				console.log(response);
 				redirect.push('/chat');
 				
@@ -49,7 +50,9 @@ class Auth extends Component {
           </div>
           <div><input type="button" value="Log In" onClick={()=> this.logIn()}/></div> 
                   
-            {this.props.NickName}
+            {this.props.User.nickName}
+            {this.props.User.id}
+            {console.log(this.props)}
         </div>
        
     );
@@ -57,7 +60,7 @@ class Auth extends Component {
 }
 function mapStateToProps(state){
   return {
-    NickName :  state.nickName
+    User : state.userData
   }
 }
 

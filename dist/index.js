@@ -26701,7 +26701,104 @@ var Routes = exports.Routes = _react2.default.createElement(
 	)
 );
 
-},{"./components/Chat/Chat":268,"./components/Main/Main":270,"react":253,"react-router-dom":102}],268:[function(require,module,exports){
+},{"./components/Chat/Chat":268,"./components/Main/Main":279,"react":253,"react-router-dom":102}],268:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _userDataActions = require('../../redux/actions/userDataActions');
+
+var U = _interopRequireWildcard(_userDataActions);
+
+var _reactRouterDom = require('react-router-dom');
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _Menu = require('./Menu/Menu');
+
+var _Menu2 = _interopRequireDefault(_Menu);
+
+var _Dialogs = require('./Dialogs/Dialogs');
+
+var _Dialogs2 = _interopRequireDefault(_Dialogs);
+
+var _Dialog = require('./Dialog/Dialog');
+
+var _Dialog2 = _interopRequireDefault(_Dialog);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Chat = function (_Component) {
+	_inherits(Chat, _Component);
+
+	function Chat() {
+		_classCallCheck(this, Chat);
+
+		return _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).apply(this, arguments));
+	}
+
+	_createClass(Chat, [{
+		key: 'render',
+		value: function render() {
+			var dispatch = this.props.dispatch;
+			var history = this.props.history;
+			_axios2.default.post('/api/get_session').then(function (response) {
+				if (response.data.nameUser && response.data.id) {
+					// console.log(response.data.nameUser);
+					dispatch(U.editNickName(response.data.nameUser));
+					dispatch(U.editId(response.data.id));
+				} else {
+					history.push('/');
+				}
+			}).catch(function (error) {
+				console.log(error);
+			});
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'chat' },
+				_react2.default.createElement(_Menu2.default, null),
+				_react2.default.createElement(
+					'div',
+					{ className: 'chat_content' },
+					_react2.default.createElement(_Dialogs2.default, null),
+					_react2.default.createElement(_Dialog2.default, null)
+				)
+			);
+		}
+	}]);
+
+	return Chat;
+}(_react.Component);
+
+function mapStateToProps(state) {
+	return {
+		User: state.userData
+	};
+}
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Chat));
+
+},{"../../redux/actions/userDataActions":285,"./Dialog/Dialog":269,"./Dialogs/Dialogs":275,"./Menu/Menu":277,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],269:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26716,15 +26813,168 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
-var _nickNameActions = require('../../redux/actions/nickNameActions');
-
-var Nick = _interopRequireWildcard(_nickNameActions);
-
 var _reactRouterDom = require('react-router-dom');
+
+var _Messages = require('./Messages/Messages');
+
+var _Messages2 = _interopRequireDefault(_Messages);
+
+var _Sender = require('./Sender/Sender');
+
+var _Sender2 = _interopRequireDefault(_Sender);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Dialog = function (_Component) {
+  _inherits(Dialog, _Component);
+
+  function Dialog() {
+    _classCallCheck(this, Dialog);
+
+    return _possibleConstructorReturn(this, (Dialog.__proto__ || Object.getPrototypeOf(Dialog)).apply(this, arguments));
+  }
+
+  _createClass(Dialog, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'dialog' },
+        _react2.default.createElement(_Messages2.default, null),
+        _react2.default.createElement(_Sender2.default, null)
+      );
+    }
+  }]);
+
+  return Dialog;
+}(_react.Component);
+
+function mapStateToProps(state) {
+  return {
+    dialog: state.dialog,
+    path: state.location
+  };
+}
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Dialog));
+
+},{"./Messages/Messages":271,"./Sender/Sender":274,"react":253,"react-redux":85,"react-router-dom":102}],270:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Message = function (_Component) {
+  _inherits(Message, _Component);
+
+  function Message() {
+    _classCallCheck(this, Message);
+
+    return _possibleConstructorReturn(this, (Message.__proto__ || Object.getPrototypeOf(Message)).apply(this, arguments));
+  }
+
+  _createClass(Message, [{
+    key: 'render',
+    value: function render() {
+      var data = this.props.msg;
+      var class1 = ' message ';
+      var class2 = ' author_message ';
+
+      return _react2.default.createElement(
+        'div',
+        { className: class1 + (data.author === this.props.NickName ? 'message_me' : ''), id: data.id },
+        _react2.default.createElement(
+          'div',
+          { className: 'ava' },
+          _react2.default.createElement('img', { src: data.ava })
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            { className: class2 + (data.author === this.props.NickName ? ' author_message_me' : '') },
+            data.author_id
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'text_message' },
+            data.text
+          )
+        )
+      );
+    }
+  }]);
+
+  return Message;
+}(_react.Component);
+
+Message.PropTypes = { msg: _propTypes2.default.object, NickName: _propTypes2.default.string };
+
+function mapStateToProps(state) {
+  return { NickName: state.NickName };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Message);
+
+},{"prop-types":70,"react":253,"react-redux":85}],271:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _dialogActions = require('../../../../redux/actions/dialogActions');
+
+var D = _interopRequireWildcard(_dialogActions);
+
+var _locationActions = require('../../../../redux/actions/locationActions');
+
+var P = _interopRequireWildcard(_locationActions);
 
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
+
+var _reactRouterDom = require('react-router-dom');
+
+var _Message = require('./Message/Message');
+
+var _Message2 = _interopRequireDefault(_Message);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -26736,49 +26986,441 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Chat = function (_Component) {
-  _inherits(Chat, _Component);
+var Messages = function (_Component) {
+  _inherits(Messages, _Component);
 
-  function Chat() {
-    _classCallCheck(this, Chat);
+  function Messages() {
+    _classCallCheck(this, Messages);
 
-    return _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Messages.__proto__ || Object.getPrototypeOf(Messages)).apply(this, arguments));
   }
 
-  _createClass(Chat, [{
+  _createClass(Messages, [{
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+
+      console.log('disp', this.props.path);
+      console.log('path', this.props.location.pathname);
+
+      if (this.props.path != this.props.location.pathname.substring(6)) {
+        var self = this.props;
+        _axios2.default.post('/api/get_dialog', {
+          id: this.props.location.pathname.substring(6)
+        }).then(function (response) {
+          self.dispatch(D.createDialog(response.data));
+        }).catch(function (error) {
+          console.log(error);
+        });
+      }
+
+      this.props.dispatch(P.editLocation(this.props.location.pathname.substring(6)));
+      return true;
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var dispatch = this.props.dispatch;
-      var history = this.props.history;
-      _axios2.default.post('/api/get_session').then(function (response) {
-        if (response.data.nameUser && response.data.id) {
-          // console.log(response.data.nameUser);
-          dispatch(Nick.editNickName(response.data.nameUser));
-        } else {
-          history.push('/');
-        }
-      }).catch(function (error) {
-        console.log(error);
-      });
 
-      // console.log(this.props.nickName);
-      // console.log(this.props);
+      this.dialog = this.props.dialog.map(function (e, i) {
+        return _react2.default.createElement(_Message2.default, { msg: e, key: i });
+      });
+      console.log(this.props.dialog);
       return _react2.default.createElement(
         'div',
-        null,
-        'Chat!!!',
-        _react2.default.createElement(
-          'a',
-          { href: '/api/delete_session' },
-          '\u0412\u044B\u0439\u0442\u0438'
-        ),
-        _react2.default.createElement('br', null),
-        this.props.nickName
+        { className: 'messages' },
+        this.dialog
       );
     }
   }]);
 
-  return Chat;
+  return Messages;
+}(_react.Component);
+
+function mapStateToProps(state) {
+  return {
+    dialog: state.dialog,
+    path: state.location
+  };
+}
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Messages));
+
+},{"../../../../redux/actions/dialogActions":282,"../../../../redux/actions/locationActions":284,"./Message/Message":270,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],272:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SendButton = function (_Component) {
+  _inherits(SendButton, _Component);
+
+  function SendButton() {
+    _classCallCheck(this, SendButton);
+
+    return _possibleConstructorReturn(this, (SendButton.__proto__ || Object.getPrototypeOf(SendButton)).apply(this, arguments));
+  }
+
+  _createClass(SendButton, [{
+    key: 'render',
+    value: function render() {
+      var send = this.props.send;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'send_button' },
+        _react2.default.createElement(
+          'button',
+          { onClick: send },
+          'send'
+        )
+      );
+    }
+  }]);
+
+  return SendButton;
+}(_react.Component);
+
+exports.default = SendButton;
+
+},{"react":253}],273:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _valueTextareaActions = require('../../../../../redux/actions/valueTextareaActions');
+
+var changeTextarea = _interopRequireWildcard(_valueTextareaActions);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SendTextarea = function (_Component) {
+  _inherits(SendTextarea, _Component);
+
+  function SendTextarea() {
+    _classCallCheck(this, SendTextarea);
+
+    return _possibleConstructorReturn(this, (SendTextarea.__proto__ || Object.getPrototypeOf(SendTextarea)).apply(this, arguments));
+  }
+
+  _createClass(SendTextarea, [{
+    key: 'changeValueTextarea',
+    value: function changeValueTextarea() {
+      this.props.dispatch(changeTextarea.changeTextarea(this.valueTextarea.value));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'send_message' },
+        _react2.default.createElement('textarea', { value: this.props.value, ref: function ref(textarea) {
+            _this2.valueTextarea = textarea;
+          },
+          onChange: function onChange() {
+            return _this2.changeValueTextarea();
+          }, placeholder: 'Write here...' })
+      );
+    }
+  }]);
+
+  return SendTextarea;
+}(_react.Component);
+
+function mapStateToProps(state) {
+  return { value: state.valueTextarea };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(SendTextarea);
+
+},{"../../../../../redux/actions/valueTextareaActions":286,"react":253,"react-redux":85}],274:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _SendButton = require('./SendButton/SendButton');
+
+var _SendButton2 = _interopRequireDefault(_SendButton);
+
+var _SendTextarea = require('./SendTextarea/SendTextarea');
+
+var _SendTextarea2 = _interopRequireDefault(_SendTextarea);
+
+var _dialogActions = require('../../../../redux/actions/dialogActions');
+
+var addMsg = _interopRequireWildcard(_dialogActions);
+
+var _valueTextareaActions = require('../../../../redux/actions/valueTextareaActions');
+
+var changeTextarea = _interopRequireWildcard(_valueTextareaActions);
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _reactRouterDom = require('react-router-dom');
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Sender = function (_Component) {
+  _inherits(Sender, _Component);
+
+  function Sender() {
+    _classCallCheck(this, Sender);
+
+    return _possibleConstructorReturn(this, (Sender.__proto__ || Object.getPrototypeOf(Sender)).apply(this, arguments));
+  }
+
+  _createClass(Sender, [{
+    key: 'sendMsg',
+    value: function sendMsg() {
+      if (this.props.Value != '') {
+        _axios2.default.post('/api/add_message', {
+          dialog_id: this.props.location.pathname.substring(6),
+          author_id: this.props.User.id,
+          date: Date.now(),
+          text: this.props.Value
+        }).then(function (response) {}).catch(function (error) {
+          console.log(error);
+        });
+      }
+
+      this.props.dispatch(addMsg.addMessage({
+        date: Date.now(),
+        nickName: this.props.User.nickName,
+        text: this.props.Value
+      }));
+
+      this.props.dispatch(changeTextarea.changeTextarea(''));
+      // this.valueTextarea.innerText = '';
+      // console.log(this.valueTextarea);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_SendTextarea2.default, { ref: function ref(textarea) {
+            _this2.valueTextarea = textarea;
+          } }),
+        _react2.default.createElement(_SendButton2.default, { send: function send() {
+            return _this2.sendMsg();
+          } })
+      );
+    }
+  }]);
+
+  return Sender;
+}(_react.Component);
+
+function mapStateToProps(state) {
+  return {
+    Value: state.valueTextarea,
+    User: state.userData
+  };
+}
+
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Sender));
+
+},{"../../../../redux/actions/dialogActions":282,"../../../../redux/actions/valueTextareaActions":286,"./SendButton/SendButton":272,"./SendTextarea/SendTextarea":273,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],275:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _dialogsActions = require('../../../redux/actions/dialogsActions');
+
+var D = _interopRequireWildcard(_dialogsActions);
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _ElementDialogs = require('./ElementDialogs/ElementDialogs');
+
+var _ElementDialogs2 = _interopRequireDefault(_ElementDialogs);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Dialogs = function (_Component) {
+  _inherits(Dialogs, _Component);
+
+  function Dialogs() {
+    _classCallCheck(this, Dialogs);
+
+    return _possibleConstructorReturn(this, (Dialogs.__proto__ || Object.getPrototypeOf(Dialogs)).apply(this, arguments));
+  }
+
+  _createClass(Dialogs, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var self = this.props;
+      _axios2.default.post('/api/get_dialogs').then(function (response) {
+        self.dispatch(D.addDialogs(response.data));
+        // console.log(response.data);
+        // console.log(self);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      this.dialogs_render = this.props.dialogs_mas.map(function (e, i) {
+        return _react2.default.createElement(_ElementDialogs2.default, { title: e.title, key: i, id: e.id });
+      });
+
+      // console.log(this.props.dialogs_mas);
+      // console.log('aa');
+      return _react2.default.createElement(
+        'div',
+        { className: 'dialogs' },
+        this.dialogs_render
+      );
+    }
+  }]);
+
+  return Dialogs;
+}(_react.Component);
+
+function mapStateToProps(state) {
+  return {
+    dialogs_mas: state.dialogs
+  };
+}
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Dialogs);
+
+},{"../../../redux/actions/dialogsActions":283,"./ElementDialogs/ElementDialogs":276,"axios":1,"react":253,"react-redux":85}],276:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _reactRouterDom = require('react-router-dom');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import * as Nick from '../../redux/actions/nickNameActions';
+
+
+var ElementDialogs = function (_Component) {
+  _inherits(ElementDialogs, _Component);
+
+  function ElementDialogs() {
+    _classCallCheck(this, ElementDialogs);
+
+    return _possibleConstructorReturn(this, (ElementDialogs.__proto__ || Object.getPrototypeOf(ElementDialogs)).apply(this, arguments));
+  }
+
+  _createClass(ElementDialogs, [{
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'element_dialogs' },
+        _react2.default.createElement(
+          'div',
+          { className: 'element_dialogs_title' },
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/chat/' + this.props.id },
+            this.props.title
+          )
+        )
+      );
+    }
+  }]);
+
+  return ElementDialogs;
 }(_react.Component);
 
 function mapStateToProps(state) {
@@ -26786,9 +27428,83 @@ function mapStateToProps(state) {
     nickName: state.nickName
   };
 }
-exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Chat));
+exports.default = ElementDialogs;
 
-},{"../../redux/actions/nickNameActions":274,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],269:[function(require,module,exports){
+},{"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],277:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import * as Nick from '../../redux/actions/nickNameActions';
+
+
+var Menu = function (_Component) {
+  _inherits(Menu, _Component);
+
+  function Menu() {
+    _classCallCheck(this, Menu);
+
+    return _possibleConstructorReturn(this, (Menu.__proto__ || Object.getPrototypeOf(Menu)).apply(this, arguments));
+  }
+
+  _createClass(Menu, [{
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'menu' },
+        _react2.default.createElement(
+          'div',
+          { className: 'menu_user' },
+          this.props.nickName
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'menu_exit' },
+          _react2.default.createElement(
+            'a',
+            { href: '/api/delete_session' },
+            '\u0412\u044B\u0439\u0442\u0438'
+          )
+        ),
+        _react2.default.createElement('br', null)
+      );
+    }
+  }]);
+
+  return Menu;
+}(_react.Component);
+
+function mapStateToProps(state) {
+  return {
+    nickName: state.nickName
+  };
+}
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Menu);
+
+},{"axios":1,"react":253,"react-redux":85}],278:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26807,9 +27523,9 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactRedux = require('react-redux');
 
-var _nickNameActions = require('../../../redux/actions/nickNameActions');
+var _userDataActions = require('../../../redux/actions/userDataActions');
 
-var Nick = _interopRequireWildcard(_nickNameActions);
+var U = _interopRequireWildcard(_userDataActions);
 
 var _reactRouterDom = require('react-router-dom');
 
@@ -26853,7 +27569,8 @@ var Auth = function (_Component) {
 						}).then(function (response) {
 								if (response.data.nameUser) {
 										console.log("dispatch");
-										dispatch(Nick.editNickName(response.data.nameUser));
+										dispatch(U.editNickName(response.data.nameUser));
+										dispatch(U.editId(response.data.idUser));
 										console.log(response);
 										redirect.push('/chat');
 								}
@@ -26896,7 +27613,9 @@ var Auth = function (_Component) {
 														return _this2.logIn();
 												} })
 								),
-								this.props.NickName
+								this.props.User.nickName,
+								this.props.User.id,
+								console.log(this.props)
 						);
 				}
 		}]);
@@ -26906,13 +27625,13 @@ var Auth = function (_Component) {
 
 function mapStateToProps(state) {
 		return {
-				NickName: state.nickName
+				User: state.userData
 		};
 }
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Auth));
 
-},{"../../../redux/actions/nickNameActions":274,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],270:[function(require,module,exports){
+},{"../../../redux/actions/userDataActions":285,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],279:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26969,7 +27688,7 @@ var Main = function (_Component) {
 
 exports.default = Main;
 
-},{"./Auth/Auth":269,"./Reg/Reg":271,"react":253,"react-router-dom":102}],271:[function(require,module,exports){
+},{"./Auth/Auth":278,"./Reg/Reg":280,"react":253,"react-router-dom":102}],280:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27064,7 +27783,7 @@ var Reg = function (_Component) {
 
 exports.default = Reg;
 
-},{"axios":1,"react":253,"react-router-dom":102}],272:[function(require,module,exports){
+},{"axios":1,"react":253,"react-router-dom":102}],281:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -27111,63 +27830,120 @@ _reactDom2.default.render(_react2.default.createElement(
 
 // ReactDOM.render(component, document.getElementById('App'));
 
-},{"./Routes":267,"./redux/configureStore":275,"react":253,"react-dom":75,"react-redux":85,"react-router-dom":102}],273:[function(require,module,exports){
+},{"./Routes":267,"./redux/configureStore":287,"react":253,"react-dom":75,"react-redux":85,"react-router-dom":102}],282:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createDialog = createDialog;
+exports.addMessage = addMessage;
+var CREATE_DIALOG = exports.CREATE_DIALOG = 'CREATE_DIALOG';
+var FAIL_DIALOG = exports.FAIL_DIALOG = 'FAIL_DIALOG';
+var ADD_MESSAGE = exports.ADD_MESSAGE = 'ADD_MESSAGE';
+var DEL_DIALOG = exports.DEL_DIALOG = 'DEL_DIALOG';
+
+function createDialog(dialogs) {
+  if (dialogs.length < 1) return { type: FAIL_DIALOG };
+  return { type: CREATE_DIALOG, payloads: dialogs };
+}
+function addMessage(message) {
+  // if (dialogs == {}) return { type: FAIL_DIALOG };
+  return { type: ADD_MESSAGE, payloads: message };
+}
+
+},{}],283:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createDialogs = createDialogs;
+exports.addDialogs = addDialogs;
+var CREATE_DIALOGS = exports.CREATE_DIALOGS = 'CREATE_DIALOGS';
+var GET_DIALOGS = exports.GET_DIALOGS = 'GET_DIALOGS';
+var FAIL_DIALOGS = exports.FAIL_DIALOGS = 'FAIL_DIALOGS';
+var ADD_DIALOGS = exports.ADD_DIALOGS = 'ADD_DIALOGS';
+var DEL_DIALOGS = exports.DEL_DIALOGS = 'DEL_DIALOGS';
+
+function createDialogs(dialogs) {
+  if (dialogs.length < 1) return { type: FAIL_DIALOGS };
+  return { type: CREATE_DIALOGS, payloads: dialogs };
+}
+function addDialogs(dialogs) {
+  if (dialogs.length < 1) return { type: FAIL_DIALOGS };
+  return { type: ADD_DIALOGS, payloads: dialogs };
+}
+
+},{}],284:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.editLocation = editLocation;
+var EDIT_LOCATION = exports.EDIT_LOCATION = "EDIT_LOCATION";
+var FAIL_LOCATION = exports.FAIL_LOCATION = "FAIL_LOCATION";
+
+function editLocation(location) {
+  if (location == '') return { type: FAIL_LOCATION };
+  return { type: EDIT_LOCATION, payloads: location };
+}
+
+},{}],285:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.editNickName = editNickName;
-exports.getNickName = getNickName;
+exports.editId = editId;
 var EDIT_NICK = exports.EDIT_NICK = 'EDIT_NICK';
-var FAIL_NICK = exports.FAIL_NICK = 'FAIL_NICK';
-var GET_NICK = exports.GET_NICK = 'GET_NICK';
+var EDIT_ID = exports.EDIT_ID = 'EDIT_ID';
+var FAIL = exports.FAIL = 'FAIL';
 
 function editNickName(NickName) {
-  if (NickName === '' || !NickName) return { type: FAIL_NICK };
+  if (NickName === '' || !NickName) return { type: FAIL };
   return { type: EDIT_NICK, payloads: NickName };
 }
 
-function getNickName() {
-  return { type: GET_NICK };
+function editId(id) {
+  if (id == '' || !id) return { type: FAIL };
+  return { type: EDIT_ID, payloads: id };
 }
 
-},{}],274:[function(require,module,exports){
+},{}],286:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.editNickName = editNickName;
-exports.getNickName = getNickName;
-var EDIT_NICK = exports.EDIT_NICK = 'EDIT_NICK';
-var FAIL_NICK = exports.FAIL_NICK = 'FAIL_NICK';
-var GET_NICK = exports.GET_NICK = 'GET_NICK';
+exports.changeTextarea = changeTextarea;
+var CHANGE_TEXTAREA = exports.CHANGE_TEXTAREA = 'CHANGE_TEXTAREA';
 
-function editNickName(NickName) {
-  if (NickName === '' || !NickName) return { type: FAIL_NICK };
-  return { type: EDIT_NICK, payloads: NickName };
+function changeTextarea(text) {
+  return { type: CHANGE_TEXTAREA, payloads: text };
 }
 
-function getNickName() {
-  return { type: GET_NICK };
-}
-
-},{}],275:[function(require,module,exports){
+},{}],287:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+      value: true
 });
 
 exports.default = function () {
-  var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  var rootReducer = (0, _redux.combineReducers)({
-    nickName: _nickNameReducer2.default
-  });
+      var rootReducer = (0, _redux.combineReducers)({
+            userData: _userDataReducer2.default,
+            dialogs: _dialogsReducer2.default,
+            dialog: _dialogReducer2.default,
+            location: _locationReducer2.default,
+            valueTextarea: _valueTextareaReducer2.default
+      });
 
-  return (0, _redux.createStore)(rootReducer, initialState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+      return (0, _redux.createStore)(rootReducer, initialState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 };
 
 var _redux = require('redux');
@@ -27176,13 +27952,29 @@ var _reduxThunk = require('redux-thunk');
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _nickNameReducer = require('./reducers/nickNameReducer');
+var _userDataReducer = require('./reducers/userDataReducer');
 
-var _nickNameReducer2 = _interopRequireDefault(_nickNameReducer);
+var _userDataReducer2 = _interopRequireDefault(_userDataReducer);
+
+var _dialogsReducer = require('./reducers/dialogsReducer');
+
+var _dialogsReducer2 = _interopRequireDefault(_dialogsReducer);
+
+var _dialogReducer = require('./reducers/dialogReducer');
+
+var _dialogReducer2 = _interopRequireDefault(_dialogReducer);
+
+var _locationReducer = require('./reducers/locationReducer');
+
+var _locationReducer2 = _interopRequireDefault(_locationReducer);
+
+var _valueTextareaReducer = require('./reducers/valueTextareaReducer');
+
+var _valueTextareaReducer2 = _interopRequireDefault(_valueTextareaReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./reducers/nickNameReducer":276,"redux":260,"redux-thunk":254}],276:[function(require,module,exports){
+},{"./reducers/dialogReducer":288,"./reducers/dialogsReducer":289,"./reducers/locationReducer":290,"./reducers/userDataReducer":291,"./reducers/valueTextareaReducer":292,"redux":260,"redux-thunk":254}],288:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27194,19 +27986,131 @@ exports.default = function () {
   var action = arguments[1];
 
   switch (action.type) {
-    case _NickNameActions.EDIT_NICK:
-      return action.payloads;
-    case _NickNameActions.FAIL_NICK:
+    case _dialogActions.FAIL_DIALOG:
       return state;
-    case _NickNameActions.GET_NICK:
+    case _dialogActions.CREATE_DIALOG:
+      // console.log(state);
+      // console.log(action.payloads);
+      // if(state.length >= action.payloads && state[0].dialog_id != action.payloads[0].dialog_id) return state;
+      return action.payloads;
+    case _dialogActions.ADD_MESSAGE:
+      return [].concat(_toConsumableArray(state), [action.payloads]);
+    default:
+      return state;
+  }
+};
+
+var _dialogActions = require('../actions/dialogActions');
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var initialState = [{ dialog_id: 100500 }];
+
+},{"../actions/dialogActions":282}],289:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _dialogsActions.FAIL_DIALOGS:
+      return state;
+    case _dialogsActions.CREATE_DIALOGS:
+      return action.payloads;
+    case _dialogsActions.ADD_DIALOGS:
+      return [].concat(_toConsumableArray(state), _toConsumableArray(action.payloads));
+    default:
+      return state;
+  }
+};
+
+var _dialogsActions = require('../actions/dialogsActions');
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var initialState = [];
+
+},{"../actions/dialogsActions":283}],290:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _locationActions.FAIL_LOCATION:
+      return state;
+    case _locationActions.EDIT_LOCATION:
+      return action.payloads;
+    default:
+      return state;
+  }
+};
+
+var _locationActions = require("../actions/locationActions");
+
+var initialState = "";
+
+},{"../actions/locationActions":284}],291:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _userDataActions.EDIT_NICK:
+      state.nickName = action.payloads;
+      return state;
+    case _userDataActions.EDIT_ID:
+      state.id = action.payloads;
+      return state;
+    case _userDataActions.FAIL:
       return state;
     default:
       return state;
   }
 };
 
-var _NickNameActions = require('../actions/NickNameActions');
+var _userDataActions = require("../actions/userDataActions");
 
+var initialState = { id: 0, nickName: "" };
+
+},{"../actions/userDataActions":285}],292:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _valueTextareaActions.CHANGE_TEXTAREA:
+      return action.payloads;
+    default:
+      return state;
+  }
+};
+
+var _valueTextareaActions = require('../actions/valueTextareaActions');
+
+// const initialState = {NickName : 'Аноним'};
 var initialState = '';
 
-},{"../actions/NickNameActions":273}]},{},[272]);
+},{"../actions/valueTextareaActions":286}]},{},[281]);
