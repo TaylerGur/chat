@@ -1,6 +1,15 @@
 .dialogs{
+	background-color:white;
 	width: 250px;
 	height: 100%;
-	border:1px solid blue;
+	border-right:1px solid #a7cfff;
 	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-top: 1px; 
+
+	h4{
+		text-align: center;
+		color: #a7cfff;
+		font-size: cursive;
+	}
 }

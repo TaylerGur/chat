@@ -20,16 +20,17 @@ class Reg extends Component {
 	}
   render() {
     return (
-        <div className="auth">
+
+        <div className="reg">
           <div>
-            <div className="auth_label">Логин</div>
+            <div className="reg_label">Nick</div>
             <input type="text" id="nickReg"/>
           </div>
           <div>
-            <div className="auth_label">Пароль</div>
+            <div className="reg_label">Пароль</div>
             <input type="password" id="passReg"/>
           </div>
-          <div><input type="button" value="Reg" onClick={()=> this.reg()}/></div> 
+          <div className="reg_submit"><input type="button" value="Регистрация" onClick={()=> this.reg()}/></div> 
                   
             
         </div>

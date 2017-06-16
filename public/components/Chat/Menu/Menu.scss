@@ -1,11 +1,19 @@
 .menu{
-	padding: 10px;
-	border:1px solid green;
+	padding-top: 10px;
+	/*border:1px solid green;*/
 	position: relative;
+	font-family: cursive;
+	color:white;
+	font-size: 18px;
 
 	&_exit{
 		position: absolute;
 		right: 20px;
+		
+		& a{
+			color:white;
+			text-decoration: none;
+		}	
 	}
 	
 	&_user{

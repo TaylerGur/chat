@@ -51,7 +51,7 @@ app.post('/api/add_message', jsonParser, function(req, res){
     
 });
 app.post('/api/get_dialog', jsonParser, function(req, res){
-    mysql.query("SELECT m.text, m.date, u.nickName  FROM messages m INNER JOIN users u ON m.author_id = u.id WHERE dialog_id='" + req.body.id + "' ORDER BY m.date", function(err, result,field){
+    mysql.query("SELECT m.text, m.date, m.author_id , u.nickName  FROM messages m INNER JOIN users u ON m.author_id = u.id WHERE dialog_id='" + req.body.id + "' ORDER BY m.date", function(err, result,field){
    
         if(err) {
             console.log('%%%%%%%%GET_DIALOG_ERROR%%%%%%%%%');

@@ -4637,7 +4637,7 @@ function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
 }
 
 exports.default = [whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject];
-},{"./wrapMapToProps":84,"redux":260}],80:[function(require,module,exports){
+},{"./wrapMapToProps":84,"redux":261}],80:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5766,7 +5766,7 @@ var createLocation = exports.createLocation = function createLocation(path, stat
 var locationsAreEqual = exports.locationsAreEqual = function locationsAreEqual(a, b) {
   return a.pathname === b.pathname && a.search === b.search && a.hash === b.hash && a.key === b.key && (0, _valueEqual2.default)(a.state, b.state);
 };
-},{"./PathUtils":106,"resolve-pathname":262,"value-equal":266}],106:[function(require,module,exports){
+},{"./PathUtils":106,"resolve-pathname":263,"value-equal":267}],106:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -25840,6 +25840,28 @@ module.exports = validateDOMNesting;
 module.exports = require('./lib/React');
 
 },{"./lib/React":148}],254:[function(require,module,exports){
+"use strict";
+
+var compose = require('redux').compose;
+
+exports.__esModule = true;
+exports.composeWithDevTools = (
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :
+    function() {
+      if (arguments.length === 0) return undefined;
+      if (typeof arguments[0] === 'object') return compose;
+      return compose.apply(null, arguments);
+    }
+);
+
+exports.devToolsEnhancer = (
+  typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION__ :
+    function() { return function(noop) { return noop; } }
+);
+
+},{"redux":261}],255:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -25863,7 +25885,7 @@ var thunk = createThunkMiddleware();
 thunk.withExtraArgument = createThunkMiddleware;
 
 exports['default'] = thunk;
-},{}],255:[function(require,module,exports){
+},{}],256:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -25922,7 +25944,7 @@ function applyMiddleware() {
     };
   };
 }
-},{"./compose":258}],256:[function(require,module,exports){
+},{"./compose":259}],257:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -25974,7 +25996,7 @@ function bindActionCreators(actionCreators, dispatch) {
   }
   return boundActionCreators;
 }
-},{}],257:[function(require,module,exports){
+},{}],258:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -26119,7 +26141,7 @@ function combineReducers(reducers) {
   };
 }
 }).call(this,require('_process'))
-},{"./createStore":259,"./utils/warning":261,"_process":66,"lodash/isPlainObject":65}],258:[function(require,module,exports){
+},{"./createStore":260,"./utils/warning":262,"_process":66,"lodash/isPlainObject":65}],259:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -26158,7 +26180,7 @@ function compose() {
     }, last.apply(undefined, arguments));
   };
 }
-},{}],259:[function(require,module,exports){
+},{}],260:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -26420,7 +26442,7 @@ function createStore(reducer, preloadedState, enhancer) {
     replaceReducer: replaceReducer
   }, _ref2[_symbolObservable2['default']] = observable, _ref2;
 }
-},{"lodash/isPlainObject":65,"symbol-observable":263}],260:[function(require,module,exports){
+},{"lodash/isPlainObject":65,"symbol-observable":264}],261:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -26469,7 +26491,7 @@ exports.bindActionCreators = _bindActionCreators2['default'];
 exports.applyMiddleware = _applyMiddleware2['default'];
 exports.compose = _compose2['default'];
 }).call(this,require('_process'))
-},{"./applyMiddleware":255,"./bindActionCreators":256,"./combineReducers":257,"./compose":258,"./createStore":259,"./utils/warning":261,"_process":66}],261:[function(require,module,exports){
+},{"./applyMiddleware":256,"./bindActionCreators":257,"./combineReducers":258,"./compose":259,"./createStore":260,"./utils/warning":262,"_process":66}],262:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -26495,7 +26517,7 @@ function warning(message) {
   } catch (e) {}
   /* eslint-enable no-empty */
 }
-},{}],262:[function(require,module,exports){
+},{}],263:[function(require,module,exports){
 'use strict';
 
 var isAbsolute = function isAbsolute(pathname) {
@@ -26566,10 +26588,10 @@ var resolvePathname = function resolvePathname(to) {
 };
 
 module.exports = resolvePathname;
-},{}],263:[function(require,module,exports){
+},{}],264:[function(require,module,exports){
 module.exports = require('./lib/index');
 
-},{"./lib/index":264}],264:[function(require,module,exports){
+},{"./lib/index":265}],265:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -26601,7 +26623,7 @@ if (typeof self !== 'undefined') {
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./ponyfill":265}],265:[function(require,module,exports){
+},{"./ponyfill":266}],266:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26625,7 +26647,7 @@ function symbolObservablePonyfill(root) {
 
 	return result;
 };
-},{}],266:[function(require,module,exports){
+},{}],267:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -26666,7 +26688,7 @@ var valueEqual = function valueEqual(a, b) {
 };
 
 exports.default = valueEqual;
-},{}],267:[function(require,module,exports){
+},{}],268:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26701,7 +26723,7 @@ var Routes = exports.Routes = _react2.default.createElement(
 	)
 );
 
-},{"./components/Chat/Chat":268,"./components/Main/Main":279,"react":253,"react-router-dom":102}],268:[function(require,module,exports){
+},{"./components/Chat/Chat":269,"./components/Main/Main":280,"react":253,"react-router-dom":102}],269:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26760,11 +26782,11 @@ var Chat = function (_Component) {
 	_createClass(Chat, [{
 		key: 'render',
 		value: function render() {
+			console.log(this.props);
 			var dispatch = this.props.dispatch;
 			var history = this.props.history;
 			_axios2.default.post('/api/get_session').then(function (response) {
 				if (response.data.nameUser && response.data.id) {
-					// console.log(response.data.nameUser);
 					dispatch(U.editNickName(response.data.nameUser));
 					dispatch(U.editId(response.data.id));
 				} else {
@@ -26777,7 +26799,7 @@ var Chat = function (_Component) {
 			return _react2.default.createElement(
 				'div',
 				{ className: 'chat' },
-				_react2.default.createElement(_Menu2.default, null),
+				_react2.default.createElement(_Menu2.default, { user: this.props.User }),
 				_react2.default.createElement(
 					'div',
 					{ className: 'chat_content' },
@@ -26793,12 +26815,13 @@ var Chat = function (_Component) {
 
 function mapStateToProps(state) {
 	return {
-		User: state.userData
+		User: state.userData,
+		nick: state.userData.nickName
 	};
 }
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Chat));
 
-},{"../../redux/actions/userDataActions":285,"./Dialog/Dialog":269,"./Dialogs/Dialogs":275,"./Menu/Menu":277,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],269:[function(require,module,exports){
+},{"../../redux/actions/userDataActions":286,"./Dialog/Dialog":270,"./Dialogs/Dialogs":276,"./Menu/Menu":278,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],270:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26863,7 +26886,7 @@ function mapStateToProps(state) {
 }
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Dialog));
 
-},{"./Messages/Messages":271,"./Sender/Sender":274,"react":253,"react-redux":85,"react-router-dom":102}],270:[function(require,module,exports){
+},{"./Messages/Messages":272,"./Sender/Sender":275,"react":253,"react-redux":85,"react-router-dom":102}],271:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26905,22 +26928,23 @@ var Message = function (_Component) {
       var data = this.props.msg;
       var class1 = ' message ';
       var class2 = ' author_message ';
+      console.log('data', data);
 
       return _react2.default.createElement(
         'div',
-        { className: class1 + (data.author === this.props.NickName ? 'message_me' : ''), id: data.id },
+        { className: class1 + (data.author_id === this.props.user.id ? 'message_me' : ''), id: data.id },
         _react2.default.createElement(
           'div',
           { className: 'ava' },
-          _react2.default.createElement('img', { src: data.ava })
+          _react2.default.createElement('img', { src: data.author_id !== this.props.user.id ? '/dist/img/ava1.png' : '/dist/img/ava2.png' })
         ),
         _react2.default.createElement(
           'div',
           null,
           _react2.default.createElement(
             'div',
-            { className: class2 + (data.author === this.props.NickName ? ' author_message_me' : '') },
-            data.author_id
+            { className: class2 + (data.author_id == this.props.user.id ? ' author_message_me' : '') },
+            data.nickName
           ),
           _react2.default.createElement(
             'div',
@@ -26938,12 +26962,12 @@ var Message = function (_Component) {
 Message.PropTypes = { msg: _propTypes2.default.object, NickName: _propTypes2.default.string };
 
 function mapStateToProps(state) {
-  return { NickName: state.NickName };
+  return { user: state.userData };
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Message);
 
-},{"prop-types":70,"react":253,"react-redux":85}],271:[function(require,module,exports){
+},{"prop-types":70,"react":253,"react-redux":85}],272:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27023,7 +27047,6 @@ var Messages = function (_Component) {
       this.dialog = this.props.dialog.map(function (e, i) {
         return _react2.default.createElement(_Message2.default, { msg: e, key: i });
       });
-      console.log(this.props.dialog);
       return _react2.default.createElement(
         'div',
         { className: 'messages' },
@@ -27043,7 +27066,7 @@ function mapStateToProps(state) {
 }
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Messages));
 
-},{"../../../../redux/actions/dialogActions":282,"../../../../redux/actions/locationActions":284,"./Message/Message":270,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],272:[function(require,module,exports){
+},{"../../../../redux/actions/dialogActions":283,"../../../../redux/actions/locationActions":285,"./Message/Message":271,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],273:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27095,7 +27118,7 @@ var SendButton = function (_Component) {
 
 exports.default = SendButton;
 
-},{"react":253}],273:[function(require,module,exports){
+},{"react":253}],274:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27146,7 +27169,7 @@ var SendTextarea = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'send_message' },
-        _react2.default.createElement('textarea', { value: this.props.value, ref: function ref(textarea) {
+        _react2.default.createElement('input', { type: 'text', value: this.props.value, ref: function ref(textarea) {
             _this2.valueTextarea = textarea;
           },
           onChange: function onChange() {
@@ -27165,7 +27188,7 @@ function mapStateToProps(state) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(SendTextarea);
 
-},{"../../../../../redux/actions/valueTextareaActions":286,"react":253,"react-redux":85}],274:[function(require,module,exports){
+},{"../../../../../redux/actions/valueTextareaActions":287,"react":253,"react-redux":85}],275:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27275,7 +27298,7 @@ function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Sender));
 
-},{"../../../../redux/actions/dialogActions":282,"../../../../redux/actions/valueTextareaActions":286,"./SendButton/SendButton":272,"./SendTextarea/SendTextarea":273,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],275:[function(require,module,exports){
+},{"../../../../redux/actions/dialogActions":283,"../../../../redux/actions/valueTextareaActions":287,"./SendButton/SendButton":273,"./SendTextarea/SendTextarea":274,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],276:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27327,8 +27350,6 @@ var Dialogs = function (_Component) {
       var self = this.props;
       _axios2.default.post('/api/get_dialogs').then(function (response) {
         self.dispatch(D.addDialogs(response.data));
-        // console.log(response.data);
-        // console.log(self);
       }).catch(function (error) {
         console.log(error);
       });
@@ -27340,11 +27361,14 @@ var Dialogs = function (_Component) {
         return _react2.default.createElement(_ElementDialogs2.default, { title: e.title, key: i, id: e.id });
       });
 
-      // console.log(this.props.dialogs_mas);
-      // console.log('aa');
       return _react2.default.createElement(
         'div',
         { className: 'dialogs' },
+        _react2.default.createElement(
+          'h4',
+          null,
+          '\u0427\u0430\u0442\u044B'
+        ),
         this.dialogs_render
       );
     }
@@ -27360,7 +27384,7 @@ function mapStateToProps(state) {
 }
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Dialogs);
 
-},{"../../../redux/actions/dialogsActions":283,"./ElementDialogs/ElementDialogs":276,"axios":1,"react":253,"react-redux":85}],276:[function(require,module,exports){
+},{"../../../redux/actions/dialogsActions":284,"./ElementDialogs/ElementDialogs":277,"axios":1,"react":253,"react-redux":85}],277:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27430,7 +27454,7 @@ function mapStateToProps(state) {
 }
 exports.default = ElementDialogs;
 
-},{"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],277:[function(require,module,exports){
+},{"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],278:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27445,9 +27469,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
+var _userDataActions = require('../../../redux/actions/userDataActions');
+
+var U = _interopRequireWildcard(_userDataActions);
+
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27456,8 +27486,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import * as Nick from '../../redux/actions/nickNameActions';
-
 
 var Menu = function (_Component) {
   _inherits(Menu, _Component);
@@ -27478,7 +27506,7 @@ var Menu = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'menu_user' },
-          this.props.nickName
+          this.props.nick
         ),
         _react2.default.createElement(
           'div',
@@ -27499,12 +27527,13 @@ var Menu = function (_Component) {
 
 function mapStateToProps(state) {
   return {
-    nickName: state.nickName
+    nick: state.userData.nickName,
+    id: state.userData.id
   };
 }
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Menu);
 
-},{"axios":1,"react":253,"react-redux":85}],278:[function(require,module,exports){
+},{"../../../redux/actions/userDataActions":286,"axios":1,"react":253,"react-redux":85}],279:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27592,7 +27621,7 @@ var Auth = function (_Component) {
 										_react2.default.createElement(
 												'div',
 												{ className: 'auth_label' },
-												'\u041B\u043E\u0433\u0438\u043D'
+												'Nick'
 										),
 										_react2.default.createElement('input', { type: 'text', id: 'login_log' })
 								),
@@ -27608,13 +27637,11 @@ var Auth = function (_Component) {
 								),
 								_react2.default.createElement(
 										'div',
-										null,
-										_react2.default.createElement('input', { type: 'button', value: 'Log In', onClick: function onClick() {
+										{ className: 'auth_submit' },
+										_react2.default.createElement('input', { type: 'button', value: 'Goo!', onClick: function onClick() {
 														return _this2.logIn();
 												} })
 								),
-								this.props.User.nickName,
-								this.props.User.id,
 								console.log(this.props)
 						);
 				}
@@ -27631,7 +27658,7 @@ function mapStateToProps(state) {
 
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Auth));
 
-},{"../../../redux/actions/userDataActions":285,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],279:[function(require,module,exports){
+},{"../../../redux/actions/userDataActions":286,"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],280:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27676,8 +27703,23 @@ var Main = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'main' },
+        _react2.default.createElement(
+          'h2',
+          null,
+          'LocalChat'
+        ),
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Your home chat*'
+        ),
         _react2.default.createElement(_Auth2.default, null),
+        _react2.default.createElement(
+          'h4',
+          null,
+          '\u0414\u043B\u044F \u0442\u0435\u0445 \u043A\u0442\u043E \u0432 \u043F\u0435\u0440\u0432\u044B\u0439 \u0440\u0430\u0437*'
+        ),
         _react2.default.createElement(_Reg2.default, null)
       );
     }
@@ -27688,7 +27730,7 @@ var Main = function (_Component) {
 
 exports.default = Main;
 
-},{"./Auth/Auth":278,"./Reg/Reg":280,"react":253,"react-router-dom":102}],280:[function(require,module,exports){
+},{"./Auth/Auth":279,"./Reg/Reg":281,"react":253,"react-router-dom":102}],281:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27746,14 +27788,14 @@ var Reg = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'auth' },
+        { className: 'reg' },
         _react2.default.createElement(
           'div',
           null,
           _react2.default.createElement(
             'div',
-            { className: 'auth_label' },
-            '\u041B\u043E\u0433\u0438\u043D'
+            { className: 'reg_label' },
+            'Nick'
           ),
           _react2.default.createElement('input', { type: 'text', id: 'nickReg' })
         ),
@@ -27762,15 +27804,15 @@ var Reg = function (_Component) {
           null,
           _react2.default.createElement(
             'div',
-            { className: 'auth_label' },
+            { className: 'reg_label' },
             '\u041F\u0430\u0440\u043E\u043B\u044C'
           ),
           _react2.default.createElement('input', { type: 'password', id: 'passReg' })
         ),
         _react2.default.createElement(
           'div',
-          null,
-          _react2.default.createElement('input', { type: 'button', value: 'Reg', onClick: function onClick() {
+          { className: 'reg_submit' },
+          _react2.default.createElement('input', { type: 'button', value: '\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044F', onClick: function onClick() {
               return _this2.reg();
             } })
         )
@@ -27783,7 +27825,7 @@ var Reg = function (_Component) {
 
 exports.default = Reg;
 
-},{"axios":1,"react":253,"react-router-dom":102}],281:[function(require,module,exports){
+},{"axios":1,"react":253,"react-router-dom":102}],282:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -27830,7 +27872,7 @@ _reactDom2.default.render(_react2.default.createElement(
 
 // ReactDOM.render(component, document.getElementById('App'));
 
-},{"./Routes":267,"./redux/configureStore":287,"react":253,"react-dom":75,"react-redux":85,"react-router-dom":102}],282:[function(require,module,exports){
+},{"./Routes":268,"./redux/configureStore":288,"react":253,"react-dom":75,"react-redux":85,"react-router-dom":102}],283:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27852,7 +27894,7 @@ function addMessage(message) {
   return { type: ADD_MESSAGE, payloads: message };
 }
 
-},{}],283:[function(require,module,exports){
+},{}],284:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27875,7 +27917,7 @@ function addDialogs(dialogs) {
   return { type: ADD_DIALOGS, payloads: dialogs };
 }
 
-},{}],284:[function(require,module,exports){
+},{}],285:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27890,29 +27932,56 @@ function editLocation(location) {
   return { type: EDIT_LOCATION, payloads: location };
 }
 
-},{}],285:[function(require,module,exports){
+},{}],286:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+		value: true
 });
+exports.FAIL = exports.EDIT_ID = exports.EDIT_NICK = undefined;
 exports.editNickName = editNickName;
 exports.editId = editId;
+exports.axi = axi;
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var EDIT_NICK = exports.EDIT_NICK = 'EDIT_NICK';
+
 var EDIT_ID = exports.EDIT_ID = 'EDIT_ID';
 var FAIL = exports.FAIL = 'FAIL';
 
 function editNickName(NickName) {
-  if (NickName === '' || !NickName) return { type: FAIL };
-  return { type: EDIT_NICK, payloads: NickName };
+		// if (NickName === '' || !NickName) return { type: FAIL };
+		return { type: EDIT_NICK, payloads: NickName };
 }
 
 function editId(id) {
-  if (id == '' || !id) return { type: FAIL };
-  return { type: EDIT_ID, payloads: id };
+		// if (id == '' || !id) return { type: FAIL };
+		return { type: EDIT_ID, payloads: id };
 }
 
-},{}],286:[function(require,module,exports){
+function axi(url) {
+		return function (dispatch) {
+
+				_axios2.default.post(url).then(function (response) {
+						if (response.data.nameUser && response.data.id) {
+								dispatch(editNickName(response.data.nameUser));
+								dispatch(editId(response.data.id));
+								return true;
+						} else {
+								return false;
+						}
+				}).catch(function (error) {
+						console.log(error);
+				});
+		};
+}
+
+},{"axios":1}],287:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27925,7 +27994,7 @@ function changeTextarea(text) {
   return { type: CHANGE_TEXTAREA, payloads: text };
 }
 
-},{}],287:[function(require,module,exports){
+},{}],288:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27943,7 +28012,7 @@ exports.default = function () {
             valueTextarea: _valueTextareaReducer2.default
       });
 
-      return (0, _redux.createStore)(rootReducer, initialState, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+      return (0, _redux.createStore)(rootReducer, (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxThunk2.default)));
 };
 
 var _redux = require('redux');
@@ -27951,6 +28020,8 @@ var _redux = require('redux');
 var _reduxThunk = require('redux-thunk');
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+var _reduxDevtoolsExtension = require('redux-devtools-extension');
 
 var _userDataReducer = require('./reducers/userDataReducer');
 
@@ -27974,7 +28045,7 @@ var _valueTextareaReducer2 = _interopRequireDefault(_valueTextareaReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./reducers/dialogReducer":288,"./reducers/dialogsReducer":289,"./reducers/locationReducer":290,"./reducers/userDataReducer":291,"./reducers/valueTextareaReducer":292,"redux":260,"redux-thunk":254}],288:[function(require,module,exports){
+},{"./reducers/dialogReducer":289,"./reducers/dialogsReducer":290,"./reducers/locationReducer":291,"./reducers/userDataReducer":292,"./reducers/valueTextareaReducer":293,"redux":261,"redux-devtools-extension":254,"redux-thunk":255}],289:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28006,7 +28077,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var initialState = [{ dialog_id: 100500 }];
 
-},{"../actions/dialogActions":282}],289:[function(require,module,exports){
+},{"../actions/dialogActions":283}],290:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28035,7 +28106,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var initialState = [];
 
-},{"../actions/dialogsActions":283}],290:[function(require,module,exports){
+},{"../actions/dialogsActions":284}],291:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28060,8 +28131,8 @@ var _locationActions = require("../actions/locationActions");
 
 var initialState = "";
 
-},{"../actions/locationActions":284}],291:[function(require,module,exports){
-"use strict";
+},{"../actions/locationActions":285}],292:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -28073,7 +28144,8 @@ exports.default = function () {
 
   switch (action.type) {
     case _userDataActions.EDIT_NICK:
-      state.nickName = action.payloads;
+      var s = state;
+      s.nickName = action.payloads;
       return state;
     case _userDataActions.EDIT_ID:
       state.id = action.payloads;
@@ -28085,11 +28157,11 @@ exports.default = function () {
   }
 };
 
-var _userDataActions = require("../actions/userDataActions");
+var _userDataActions = require('../actions/userDataActions');
 
-var initialState = { id: 0, nickName: "" };
+var initialState = { id: 0, nickName: "", ava: 'http://localhost:81/dist/img/ava1.png' };
 
-},{"../actions/userDataActions":285}],292:[function(require,module,exports){
+},{"../actions/userDataActions":286}],293:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28113,4 +28185,4 @@ var _valueTextareaActions = require('../actions/valueTextareaActions');
 // const initialState = {NickName : 'Аноним'};
 var initialState = '';
 
-},{"../actions/valueTextareaActions":286}]},{},[281]);
+},{"../actions/valueTextareaActions":287}]},{},[282]);

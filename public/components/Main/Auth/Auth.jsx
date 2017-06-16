@@ -41,17 +41,16 @@ class Auth extends Component {
     return (
         <div className="auth">
           <div>
-            <div className="auth_label">Логин</div>
+            <div className="auth_label">Nick</div>
             <input type="text" id="login_log"/>
           </div>
           <div>
             <div className="auth_label">Пароль</div>
             <input type="text" id="pass_log"/>
           </div>
-          <div><input type="button" value="Log In" onClick={()=> this.logIn()}/></div> 
+          <div className="auth_submit"><input type="button" value="Goo!" onClick={()=> this.logIn()}/></div> 
                   
-            {this.props.User.nickName}
-            {this.props.User.id}
+          
             {console.log(this.props)}
         </div>
        

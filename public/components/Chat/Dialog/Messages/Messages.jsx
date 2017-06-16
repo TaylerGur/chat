@@ -44,8 +44,7 @@ class Messages extends Component {
     this.dialog = this.props.dialog.map(function(e,i){
         return(<Message msg={e} key={i}/>);
     }); 
-  	console.log(this.props.dialog);
-    return (
+      return (
 
         <div className="messages">
           {this.dialog}

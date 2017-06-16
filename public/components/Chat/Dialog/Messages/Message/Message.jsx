@@ -7,15 +7,16 @@ class Message extends Component {
     const data = this.props.msg;
     const class1 = ' message ';
     const class2 = ' author_message ';
+    console.log('data', data);
 
     return (
-      <div className = {class1 + ((data.author === this.props.NickName)  ? 'message_me' : '')} id = {data.id}>
+      <div className = {class1 + ((data.author_id === this.props.user.id)  ? 'message_me' : '')} id = {data.id}>
         <div className='ava'>
-          <img src={data.ava}/>
+          <img src={ data.author_id !== this.props.user.id? '/dist/img/ava1.png': '/dist/img/ava2.png'}/>
         </div>
         <div>
-          <div className = {class2 + ((data.author === this.props.NickName) ? ' author_message_me' : '')} >
-            {data.author_id}
+          <div className = {class2 + ((data.author_id == this.props.user.id) ? ' author_message_me' : '')} >
+            {data.nickName}
           </div>
           <div className='text_message'>
             {data.text}
@@ -30,7 +31,7 @@ class Message extends Component {
 Message.PropTypes = {  msg : PropTypes.object, NickName : PropTypes.string  };
 
 function mapStateToProps(state) {
-  return { NickName:state.NickName };
+  return { user:state.userData };
 }
 
 

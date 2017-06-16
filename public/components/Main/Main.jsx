@@ -6,8 +6,11 @@ import Reg from './Reg/Reg';
 class Main extends Component {
   render() {
     return (
-        <div>
+        <div className="main">
+        	<h2>LocalChat</h2>
+        	<h4>Your home chat*</h4>
          	<Auth/>
+         	<h4>Для тех кто в первый раз*</h4>
          	<Reg/>
         </div>
        

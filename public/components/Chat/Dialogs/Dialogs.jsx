@@ -10,8 +10,6 @@ class Dialogs extends Component {
     axios.post('/api/get_dialogs')
       .then(function (response) {
         self.dispatch(D.addDialogs(response.data));
-        // console.log(response.data);
-        // console.log(self);
       })
       .catch(function (error) {
         console.log(error);
@@ -25,11 +23,10 @@ class Dialogs extends Component {
           return (<ElementDialogs title={e.title} key={i} id={e.id} />);
       });
 
-      // console.log(this.props.dialogs_mas);
-      // console.log('aa');
     return (
 
         <div className="dialogs">
+            <h4>Чаты</h4>
             {this.dialogs_render}
         </div>
        

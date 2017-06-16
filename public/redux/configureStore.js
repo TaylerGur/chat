@@ -1,5 +1,6 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunk from 'redux-thunk';
+import {composeWithDevTools} from 'redux-devtools-extension';
 import userDataReducer from './reducers/userDataReducer';
 import dialogsReducer from './reducers/dialogsReducer';
 import dialogReducer from './reducers/dialogReducer';
@@ -15,5 +16,5 @@ export default function (initialState = {}) {
         valueTextarea : valueTextareaReducer
   });
 
-  return createStore(rootReducer, initialState, applyMiddleware(thunk));
+  return createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 }

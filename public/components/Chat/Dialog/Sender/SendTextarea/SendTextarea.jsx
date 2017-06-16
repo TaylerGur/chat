@@ -10,7 +10,7 @@ class SendTextarea extends Component {
   render() {
     return (
       <div className='send_message'  >
-        <textarea value={this.props.value} ref={(textarea) => {this.valueTextarea = textarea;}}
+        <input type='text' value={this.props.value} ref={(textarea) => {this.valueTextarea = textarea;}}
           onChange={() => this.changeValueTextarea()} placeholder='Write here...' />
       </div>
     );
