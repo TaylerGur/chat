@@ -40,14 +40,23 @@ class Messages extends Component {
     
   }
   render() {
-
-    this.dialog = this.props.dialog.map(function(e,i){
+    console.log('dialog', this.props.dialog);
+    if(this.props.dialog[0].dialog_id != 100500){
+      this.dialog = this.props.dialog.map(function(e,i){
         return(<Message msg={e} key={i}/>);
-    }); 
+      }); 
+    }
+    this.changeMessages = (
+          <div>
+              <h3 className="messages_title">Выберите чат;)</h3>
+          </div>
+
+      );
       return (
 
         <div className="messages">
-          {this.dialog}
+          {this.props.dialog[0].dialog_id == 100500 ? this.changeMessages : this.dialog }
+          
         
         </div>
        

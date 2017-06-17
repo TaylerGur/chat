@@ -25,29 +25,41 @@ class Sender extends Component {
         .catch(function (error) {
           console.log(error);
         });
-      }
       
+
+
+
 
         this.props.dispatch(addMsg.addMessage( {
             date : Date.now(),
             nickName : this.props.User.nickName,
-            text : this.props.Value
+            text : this.props.Value,
+            author_id: this.props.User.id
           }));
+
+      }
+      
+
+        
     
     this.props.dispatch(changeTextarea.changeTextarea(''));
     // this.valueTextarea.innerText = '';
     // console.log(this.valueTextarea);
   }
+  enterSend(evt){
+      if(evt.keyCode==13) this.sendMsg();
+  }
   render() {
     return (
-      <div>
-        <SendTextarea ref={(textarea) => {this.valueTextarea = textarea;}}/>
-        <SendButton send={()=> this.sendMsg()}/>
+      <div className="sender">
+        <SendTextarea enterSend={this.enterSend.bind(this)} ref={(textarea) => {this.valueTextarea = textarea;}}/>
+        <SendButton send={()=> this.sendMsg()} />
       </div>
     );
   }
 
 }
+        // <input type="text"  onKeyDown={this.enterSend.bind(this)}/>
 
 function mapStateToProps(state){
   return {

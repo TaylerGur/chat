@@ -1,18 +1,19 @@
 .send_button{
-  
-  display: flex;
-  justify-content: flex-end;
+    width: 100%;
+  /*display: flex;*/
+  /*justify-content: flex-end;*/
   background-color: #a7cfff;
   & > button{
-   
-    margin: 10px;
+    width: 100px;
+    height: 48px;
+    margin: 1px 0 0 1px ;
     padding: 7px 15px;
     background-color: white;
     border: none;
     font-size: 15px;
     color: #00b0ff;
     border: 2px solid white;
-
+    border-right: none; 
   }
 
   & > button:focus{

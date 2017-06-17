@@ -27043,14 +27043,25 @@ var Messages = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-
-      this.dialog = this.props.dialog.map(function (e, i) {
-        return _react2.default.createElement(_Message2.default, { msg: e, key: i });
-      });
+      console.log('dialog', this.props.dialog);
+      if (this.props.dialog[0].dialog_id != 100500) {
+        this.dialog = this.props.dialog.map(function (e, i) {
+          return _react2.default.createElement(_Message2.default, { msg: e, key: i });
+        });
+      }
+      this.changeMessages = _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h3',
+          { className: 'messages_title' },
+          '\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0447\u0430\u0442;)'
+        )
+      );
       return _react2.default.createElement(
         'div',
         { className: 'messages' },
-        this.dialog
+        this.props.dialog[0].dialog_id == 100500 ? this.changeMessages : this.dialog
       );
     }
   }]);
@@ -27100,6 +27111,7 @@ var SendButton = function (_Component) {
     key: 'render',
     value: function render() {
       var send = this.props.send;
+      // console.log(enterSend());
 
       return _react2.default.createElement(
         'div',
@@ -27166,6 +27178,8 @@ var SendTextarea = function (_Component) {
     value: function render() {
       var _this2 = this;
 
+      var enterSend = this.props.enterSend;
+
       return _react2.default.createElement(
         'div',
         { className: 'send_message' },
@@ -27174,7 +27188,7 @@ var SendTextarea = function (_Component) {
           },
           onChange: function onChange() {
             return _this2.changeValueTextarea();
-          }, placeholder: 'Write here...' })
+          }, onKeyDown: enterSend, placeholder: 'Write here...' })
       );
     }
   }]);
@@ -27256,17 +27270,23 @@ var Sender = function (_Component) {
         }).then(function (response) {}).catch(function (error) {
           console.log(error);
         });
-      }
 
-      this.props.dispatch(addMsg.addMessage({
-        date: Date.now(),
-        nickName: this.props.User.nickName,
-        text: this.props.Value
-      }));
+        this.props.dispatch(addMsg.addMessage({
+          date: Date.now(),
+          nickName: this.props.User.nickName,
+          text: this.props.Value,
+          author_id: this.props.User.id
+        }));
+      }
 
       this.props.dispatch(changeTextarea.changeTextarea(''));
       // this.valueTextarea.innerText = '';
       // console.log(this.valueTextarea);
+    }
+  }, {
+    key: 'enterSend',
+    value: function enterSend(evt) {
+      if (evt.keyCode == 13) this.sendMsg();
     }
   }, {
     key: 'render',
@@ -27275,8 +27295,8 @@ var Sender = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        null,
-        _react2.default.createElement(_SendTextarea2.default, { ref: function ref(textarea) {
+        { className: 'sender' },
+        _react2.default.createElement(_SendTextarea2.default, { enterSend: this.enterSend.bind(this), ref: function ref(textarea) {
             _this2.valueTextarea = textarea;
           } }),
         _react2.default.createElement(_SendButton2.default, { send: function send() {
@@ -27288,6 +27308,7 @@ var Sender = function (_Component) {
 
   return Sender;
 }(_react.Component);
+// <input type="text"  onKeyDown={this.enterSend.bind(this)}/>
 
 function mapStateToProps(state) {
   return {

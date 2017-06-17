@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 class SendButton extends Component {
 
   render() {
+
     const { send } = this.props;
+    // console.log(enterSend());
     return (
       <div className='send_button'>
-        <button onClick={ send }>send</button>
+        <button onClick={ send }  >send</button>
       </div>
     );
   }

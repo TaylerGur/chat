@@ -8,10 +8,11 @@ class SendTextarea extends Component {
     this.props.dispatch(changeTextarea.changeTextarea(this.valueTextarea.value));
   }
   render() {
+     const { enterSend } = this.props;
     return (
       <div className='send_message'  >
         <input type='text' value={this.props.value} ref={(textarea) => {this.valueTextarea = textarea;}}
-          onChange={() => this.changeValueTextarea()} placeholder='Write here...' />
+          onChange={() => this.changeValueTextarea()} onKeyDown={enterSend} placeholder='Write here...' />
       </div>
     );
   }
