@@ -9,7 +9,7 @@ export default function (state = initialState, action) {
     case CREATE_DIALOGS:
       return action.payloads;
     case ADD_DIALOGS:
-      return [...state, ...action.payloads];
+      return [...state, action.payloads];
     default: 
       return state;
   }

@@ -13,8 +13,8 @@ class Messages extends Component {
 
   componentDidUpdate(){
 
-    console.log('disp',this.props.path);
-    console.log('path', this.props.location.pathname);
+    // console.log('disp',this.props.path);
+    // console.log('path', this.props.location.pathname);
 
      if(this.props.path != this.props.location.pathname.substring(6)){
         let self = this.props;
@@ -36,27 +36,45 @@ class Messages extends Component {
        
 
   this.props.dispatch(P.editLocation(this.props.location.pathname.substring(6)));
-     return true;
+
+  this.toScroll = () => {
+          let messages = document.getElementById('messages');
+          messages.scrollTop = messages.scrollHeight;
+  }
+  this.toScroll();
+     
+
+  return true;
     
   }
+ 
   render() {
-    console.log('dialog', this.props.dialog);
-    if(this.props.dialog[0].dialog_id != 100500){
+
+    if(Array.isArray(this.props.dialog) && this.props.dialog[0].dialog_id != 100500){
       this.dialog = this.props.dialog.map(function(e,i){
         return(<Message msg={e} key={i}/>);
       }); 
     }
+    else{
+      this.dialog = (
+          <div>
+              <h3 className="messages_title">В Чате пусто, напишите что-нибудь;)</h3>
+          </div>
+
+        );
+    }
+    
     this.changeMessages = (
           <div>
               <h3 className="messages_title">Выберите чат;)</h3>
           </div>
 
-      );
+    );
+    
       return (
 
-        <div className="messages">
-          {this.props.dialog[0].dialog_id == 100500 ? this.changeMessages : this.dialog }
-          
+        <div id="messages" className="messages">
+          {Array.isArray(this.props.dialog) &&  this.props.dialog[0].dialog_id == 100500 ? this.changeMessages : this.dialog }
         
         </div>
        

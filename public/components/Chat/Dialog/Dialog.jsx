@@ -20,10 +20,4 @@ class Dialog extends Component {
   }
 }
 
-function mapStateToProps(state) {
-	return {
-		dialog: state.dialog,
-    path: state.location
-	}
-}
-export default withRouter(connect(mapStateToProps)(Dialog));
+export default Dialog;

@@ -59,6 +59,10 @@ body {
   .menu_user {
     position: absolute;
     left: 20px; }
+  .menu_add {
+    position: absolute;
+    left: 100px;
+    cursor: pointer; }
 
 * {
   margin: 0;

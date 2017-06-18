@@ -10,7 +10,7 @@ import Dialog from './Dialog/Dialog';
 class Chat extends Component {
 
   render() {
-  	console.log(this.props);
+  	// console.log(this.props);
 		let dispatch = this.props.dispatch;
 		  	let history = this.props.history;
 			axios.post('/api/get_session')

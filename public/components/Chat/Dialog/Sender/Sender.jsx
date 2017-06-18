@@ -19,7 +19,7 @@ class Sender extends Component {
           text: this.props.Value
         })
         .then(function (response) {
-          
+          // alert(Date.now())
        
         })
         .catch(function (error) {
@@ -43,8 +43,7 @@ class Sender extends Component {
         
     
     this.props.dispatch(changeTextarea.changeTextarea(''));
-    // this.valueTextarea.innerText = '';
-    // console.log(this.valueTextarea);
+
   }
   enterSend(evt){
       if(evt.keyCode==13) this.sendMsg();
@@ -59,7 +58,6 @@ class Sender extends Component {
   }
 
 }
-        // <input type="text"  onKeyDown={this.enterSend.bind(this)}/>
 
 function mapStateToProps(state){
   return {

@@ -9,7 +9,8 @@ class Dialogs extends Component {
       let self = this.props;
     axios.post('/api/get_dialogs')
       .then(function (response) {
-        self.dispatch(D.addDialogs(response.data));
+        console.log(response.data);
+        self.dispatch(D.createDialogs(response.data));
       })
       .catch(function (error) {
         console.log(error);

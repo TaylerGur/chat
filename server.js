@@ -30,7 +30,34 @@ app.use(session({
 }));
 
 
+app.post('/api/add_dialog', jsonParser, function(req, res){
+    console.log(req.body);
+    mysql.query("INSERT IGNORE INTO dialogs (title) VALUES('" + req.body.title + "')", function(err, result,field){
+        
+        if(err) {
+            console.log('%%%%%%%%ADD_DIALOG_ERROR%%%%%%%%%');
+        }
+        if(result){
+            console.log('add chat in database');
+        
+            mysql.query("SELECT * FROM dialogs WHERE title='" + req.body.title + "' ", function(err, result,field){
+        
+                if(err) {
+                    console.log('%%%%%%%%ADD_DIALOG222_ERROR%%%%%%%%%');
+                }
+                if(result){
+                    console.log(result[0]);
+                   res.send(result[0]); 
+                  
 
+                } 
+            });
+     
+        } 
+    });
+  
+    
+});
 app.post('/api/add_message', jsonParser, function(req, res){
     console.log(req.body);
     mysql.query("INSERT IGNORE INTO messages (dialog_id, author_id, text, date) VALUES('" + req.body.dialog_id + "', '" + req.body.author_id +  "', '" + req.body.text +  "', '" + req.body.date +  "')", function(err, result,field){
@@ -47,7 +74,7 @@ app.post('/api/add_message', jsonParser, function(req, res){
        
     
     });
-    // res.send(false);
+  
     
 });
 app.post('/api/get_dialog', jsonParser, function(req, res){
@@ -66,7 +93,7 @@ app.post('/api/get_dialog', jsonParser, function(req, res){
         }
         else{
             console.log('Cообщений нет!');
-            res.send('Cообщений нет!');  
+            res.send(true);  
         }
     });
 

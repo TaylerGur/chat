@@ -26782,7 +26782,7 @@ var Chat = function (_Component) {
 	_createClass(Chat, [{
 		key: 'render',
 		value: function render() {
-			console.log(this.props);
+			// console.log(this.props);
 			var dispatch = this.props.dispatch;
 			var history = this.props.history;
 			_axios2.default.post('/api/get_session').then(function (response) {
@@ -26878,13 +26878,7 @@ var Dialog = function (_Component) {
   return Dialog;
 }(_react.Component);
 
-function mapStateToProps(state) {
-  return {
-    dialog: state.dialog,
-    path: state.location
-  };
-}
-exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps)(Dialog));
+exports.default = Dialog;
 
 },{"./Messages/Messages":272,"./Sender/Sender":275,"react":253,"react-redux":85,"react-router-dom":102}],271:[function(require,module,exports){
 'use strict';
@@ -26928,7 +26922,7 @@ var Message = function (_Component) {
       var data = this.props.msg;
       var class1 = ' message ';
       var class2 = ' author_message ';
-      console.log('data', data);
+      // console.log('data', data);
 
       return _react2.default.createElement(
         'div',
@@ -27023,8 +27017,8 @@ var Messages = function (_Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
 
-      console.log('disp', this.props.path);
-      console.log('path', this.props.location.pathname);
+      // console.log('disp',this.props.path);
+      // console.log('path', this.props.location.pathname);
 
       if (this.props.path != this.props.location.pathname.substring(6)) {
         var self = this.props;
@@ -27038,17 +27032,35 @@ var Messages = function (_Component) {
       }
 
       this.props.dispatch(P.editLocation(this.props.location.pathname.substring(6)));
+
+      this.toScroll = function () {
+        var messages = document.getElementById('messages');
+        messages.scrollTop = messages.scrollHeight;
+      };
+      this.toScroll();
+
       return true;
     }
   }, {
     key: 'render',
     value: function render() {
-      console.log('dialog', this.props.dialog);
-      if (this.props.dialog[0].dialog_id != 100500) {
+
+      if (Array.isArray(this.props.dialog) && this.props.dialog[0].dialog_id != 100500) {
         this.dialog = this.props.dialog.map(function (e, i) {
           return _react2.default.createElement(_Message2.default, { msg: e, key: i });
         });
+      } else {
+        this.dialog = _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'h3',
+            { className: 'messages_title' },
+            '\u0412 \u0427\u0430\u0442\u0435 \u043F\u0443\u0441\u0442\u043E, \u043D\u0430\u043F\u0438\u0448\u0438\u0442\u0435 \u0447\u0442\u043E-\u043D\u0438\u0431\u0443\u0434\u044C;)'
+          )
+        );
       }
+
       this.changeMessages = _react2.default.createElement(
         'div',
         null,
@@ -27058,10 +27070,11 @@ var Messages = function (_Component) {
           '\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0447\u0430\u0442;)'
         )
       );
+
       return _react2.default.createElement(
         'div',
-        { className: 'messages' },
-        this.props.dialog[0].dialog_id == 100500 ? this.changeMessages : this.dialog
+        { id: 'messages', className: 'messages' },
+        Array.isArray(this.props.dialog) && this.props.dialog[0].dialog_id == 100500 ? this.changeMessages : this.dialog
       );
     }
   }]);
@@ -27267,7 +27280,10 @@ var Sender = function (_Component) {
           author_id: this.props.User.id,
           date: Date.now(),
           text: this.props.Value
-        }).then(function (response) {}).catch(function (error) {
+        }).then(function (response) {
+          // alert(Date.now())
+
+        }).catch(function (error) {
           console.log(error);
         });
 
@@ -27280,8 +27296,6 @@ var Sender = function (_Component) {
       }
 
       this.props.dispatch(changeTextarea.changeTextarea(''));
-      // this.valueTextarea.innerText = '';
-      // console.log(this.valueTextarea);
     }
   }, {
     key: 'enterSend',
@@ -27308,7 +27322,6 @@ var Sender = function (_Component) {
 
   return Sender;
 }(_react.Component);
-// <input type="text"  onKeyDown={this.enterSend.bind(this)}/>
 
 function mapStateToProps(state) {
   return {
@@ -27370,7 +27383,8 @@ var Dialogs = function (_Component) {
     value: function componentWillMount() {
       var self = this.props;
       _axios2.default.post('/api/get_dialogs').then(function (response) {
-        self.dispatch(D.addDialogs(response.data));
+        console.log(response.data);
+        self.dispatch(D.createDialogs(response.data));
       }).catch(function (error) {
         console.log(error);
       });
@@ -27420,10 +27434,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
-var _axios = require('axios');
-
-var _axios2 = _interopRequireDefault(_axios);
-
 var _reactRouterDom = require('react-router-dom');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -27433,8 +27443,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import * as Nick from '../../redux/actions/nickNameActions';
-
 
 var ElementDialogs = function (_Component) {
   _inherits(ElementDialogs, _Component);
@@ -27468,14 +27476,9 @@ var ElementDialogs = function (_Component) {
   return ElementDialogs;
 }(_react.Component);
 
-function mapStateToProps(state) {
-  return {
-    nickName: state.nickName
-  };
-}
 exports.default = ElementDialogs;
 
-},{"axios":1,"react":253,"react-redux":85,"react-router-dom":102}],278:[function(require,module,exports){
+},{"react":253,"react-redux":85,"react-router-dom":102}],278:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27493,6 +27496,10 @@ var _reactRedux = require('react-redux');
 var _userDataActions = require('../../../redux/actions/userDataActions');
 
 var U = _interopRequireWildcard(_userDataActions);
+
+var _dialogsActions = require('../../../redux/actions/dialogsActions');
+
+var D = _interopRequireWildcard(_dialogsActions);
 
 var _axios = require('axios');
 
@@ -27518,8 +27525,22 @@ var Menu = function (_Component) {
   }
 
   _createClass(Menu, [{
+    key: 'addChat',
+    value: function addChat() {
+      var title = prompt('Название чата:');
+      var self = this.props;
+      _axios2.default.post('/api/add_dialog', {
+        title: title
+      }).then(function (response) {
+        self.dispatch(D.addDialogs(response.data));
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
 
       return _react2.default.createElement(
         'div',
@@ -27528,6 +27549,13 @@ var Menu = function (_Component) {
           'div',
           { className: 'menu_user' },
           this.props.nick
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'menu_add', onClick: function onClick() {
+              return _this2.addChat();
+            } },
+          'add chat'
         ),
         _react2.default.createElement(
           'div',
@@ -27550,11 +27578,12 @@ function mapStateToProps(state) {
   return {
     nick: state.userData.nickName,
     id: state.userData.id
+
   };
 }
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Menu);
 
-},{"../../../redux/actions/userDataActions":286,"axios":1,"react":253,"react-redux":85}],279:[function(require,module,exports){
+},{"../../../redux/actions/dialogsActions":284,"../../../redux/actions/userDataActions":286,"axios":1,"react":253,"react-redux":85}],279:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28115,7 +28144,7 @@ exports.default = function () {
     case _dialogsActions.CREATE_DIALOGS:
       return action.payloads;
     case _dialogsActions.ADD_DIALOGS:
-      return [].concat(_toConsumableArray(state), _toConsumableArray(action.payloads));
+      return [].concat(_toConsumableArray(state), [action.payloads]);
     default:
       return state;
   }
@@ -28165,8 +28194,7 @@ exports.default = function () {
 
   switch (action.type) {
     case _userDataActions.EDIT_NICK:
-      var s = state;
-      s.nickName = action.payloads;
+      state.nickName = action.payloads;
       return state;
     case _userDataActions.EDIT_ID:
       state.id = action.payloads;
@@ -28180,7 +28208,7 @@ exports.default = function () {
 
 var _userDataActions = require('../actions/userDataActions');
 
-var initialState = { id: 0, nickName: "", ava: 'http://localhost:81/dist/img/ava1.png' };
+var initialState = { id: 0, nickName: "1", ava: 'http://localhost:81/dist/img/ava1.png' };
 
 },{"../actions/userDataActions":286}],293:[function(require,module,exports){
 'use strict';

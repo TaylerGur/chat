@@ -7,7 +7,7 @@ class Message extends Component {
     const data = this.props.msg;
     const class1 = ' message ';
     const class2 = ' author_message ';
-    console.log('data', data);
+    // console.log('data', data);
 
     return (
       <div className = {class1 + ((data.author_id === this.props.user.id)  ? 'message_me' : '')} id = {data.id}>

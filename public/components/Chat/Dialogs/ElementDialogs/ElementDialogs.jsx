@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import * as Nick from '../../redux/actions/nickNameActions';
-import axios from 'axios';
 import {Link} from 'react-router-dom';
 
 
@@ -19,9 +17,5 @@ class ElementDialogs extends Component {
   }
 }
 
-function mapStateToProps(state) {
-	return {
-		nickName: state.nickName
-	}
-}
+
 export default ElementDialogs;
