@@ -7,6 +7,11 @@ var session = require('express-session');
 
 const PORT = 80;
 const app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+server.listen(PORT); 
+
+
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname);
@@ -28,6 +33,32 @@ app.use(session({
     store: new SessionStore(options_connect),
     resave: false
 }));
+
+
+
+
+io.on('connection', function (socket) {
+
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+    console.log(socket.id);
+  });
+  socket.on('update_dialogs_server', function(){
+    console.log(socket.id);
+    console.log("update_dialogs_server");
+    socket.broadcast.emit('update_dialogs_client');
+  });
+   socket.on('update_messages_server', function(){
+    console.log(socket.id);
+    console.log("update_messages_server");
+    socket.broadcast.emit('update_messages_client');
+  });
+});
+
+
+
+
 
 
 app.post('/api/add_dialog', jsonParser, function(req, res){
@@ -211,6 +242,9 @@ app.get('*', function (req, res) {
 // app.get('*', function (req, res) {
 //   res.redirect('/');
 // });
-app.listen(PORT, () => {
-  console.log(`Server listening on: ${PORT}`);
-});
+
+
+
+// app.listen(PORT, () => {
+//   console.log(`Server listening on: ${PORT}`);
+// });

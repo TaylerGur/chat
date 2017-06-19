@@ -1,6 +1,6 @@
 import { EDIT_NICK, FAIL, EDIT_ID } from '../actions/userDataActions';
 
-const initialState = {id:0, nickName:"1" ,ava:'http://localhost:81/dist/img/ava1.png'};
+const initialState = {id:0, nickName:"" ,ava:'http://localhost:81/dist/img/ava1.png'};
 
 export default function (state = initialState, action) {
   switch (action.type) {

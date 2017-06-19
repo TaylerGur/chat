@@ -7,6 +7,7 @@ import axios from 'axios';
 class Menu extends Component {
 
   addChat(){
+
     let title = prompt('Название чата:');
     let self = this.props;
     axios.post('/api/add_dialog', {
@@ -14,6 +15,8 @@ class Menu extends Component {
     })
       .then(function (response) {
         self.dispatch(D.addDialogs(response.data));
+        let socket = io.connect('http://localhost:80');
+        socket.emit('update_dialogs_server');
       })
       .catch(function (error) {
         console.log(error);

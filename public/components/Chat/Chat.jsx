@@ -7,8 +7,12 @@ import Menu from './Menu/Menu';
 import Dialogs from './Dialogs/Dialogs';
 import Dialog from './Dialog/Dialog';
 
-class Chat extends Component {
 
+
+
+
+
+class Chat extends Component {
   render() {
   	// console.log(this.props);
 		let dispatch = this.props.dispatch;
@@ -33,7 +37,7 @@ class Chat extends Component {
     	
 			<Menu user={this.props.User}/>
         	<div className="chat_content">
-        		<Dialogs/>
+        		<Dialogs update={()=> this.updateDialogs()}/>
         		
         		<Dialog/>
         	</div>

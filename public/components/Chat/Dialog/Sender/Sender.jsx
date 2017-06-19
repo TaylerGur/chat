@@ -19,7 +19,8 @@ class Sender extends Component {
           text: this.props.Value
         })
         .then(function (response) {
-          // alert(Date.now())
+             let socket = io.connect('http://localhost:80');
+             socket.emit('update_messages_server');
        
         })
         .catch(function (error) {

@@ -26782,6 +26782,8 @@ var Chat = function (_Component) {
 	_createClass(Chat, [{
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
 			// console.log(this.props);
 			var dispatch = this.props.dispatch;
 			var history = this.props.history;
@@ -26803,7 +26805,9 @@ var Chat = function (_Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'chat_content' },
-					_react2.default.createElement(_Dialogs2.default, null),
+					_react2.default.createElement(_Dialogs2.default, { update: function update() {
+							return _this2.updateDialogs();
+						} }),
 					_react2.default.createElement(_Dialog2.default, null)
 				)
 			);
@@ -27016,6 +27020,7 @@ var Messages = function (_Component) {
   _createClass(Messages, [{
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
+      var _this2 = this;
 
       // console.log('disp',this.props.path);
       // console.log('path', this.props.location.pathname);
@@ -27025,9 +27030,23 @@ var Messages = function (_Component) {
         _axios2.default.post('/api/get_dialog', {
           id: this.props.location.pathname.substring(6)
         }).then(function (response) {
+          console.log(response.data);
           self.dispatch(D.createDialog(response.data));
         }).catch(function (error) {
           console.log(error);
+        });
+
+        var socket = io.connect('http://localhost:80');
+        socket.on("update_messages_client", function () {
+          var self = _this2.props;
+          _axios2.default.post('/api/get_dialog', {
+            id: _this2.props.location.pathname.substring(6)
+          }).then(function (response) {
+            console.log("ssss", response.data);
+            self.dispatch(D.createDialog(response.data));
+          }).catch(function (error) {
+            console.log(error);
+          });
         });
       }
 
@@ -27281,8 +27300,8 @@ var Sender = function (_Component) {
           date: Date.now(),
           text: this.props.Value
         }).then(function (response) {
-          // alert(Date.now())
-
+          var socket = io.connect('http://localhost:80');
+          socket.emit('update_messages_server');
         }).catch(function (error) {
           console.log(error);
         });
@@ -27381,17 +27400,37 @@ var Dialogs = function (_Component) {
   _createClass(Dialogs, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
+      var _this2 = this;
+
       var self = this.props;
       _axios2.default.post('/api/get_dialogs').then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         self.dispatch(D.createDialogs(response.data));
       }).catch(function (error) {
         console.log(error);
+      });
+
+      var socket = io.connect('http://localhost:80');
+      socket.on('update_dialogs_client', function () {
+        // console.log(D);
+
+
+        // console.log("update_dialogs_client");
+        var self = _this2.props;
+        _axios2.default.post('/api/get_dialogs').then(function (response) {
+          // console.log(self);
+          // console.log(response.data);
+          self.dispatch(D.createDialogs(response.data));
+        }).catch(function (error) {
+          console.log(error);
+        });
       });
     }
   }, {
     key: 'render',
     value: function render() {
+      // this.props.update();
+      // console.log(this.props);
       this.dialogs_render = this.props.dialogs_mas.map(function (e, i) {
         return _react2.default.createElement(_ElementDialogs2.default, { title: e.title, key: i, id: e.id });
       });
@@ -27527,12 +27566,15 @@ var Menu = function (_Component) {
   _createClass(Menu, [{
     key: 'addChat',
     value: function addChat() {
+
       var title = prompt('Название чата:');
       var self = this.props;
       _axios2.default.post('/api/add_dialog', {
         title: title
       }).then(function (response) {
         self.dispatch(D.addDialogs(response.data));
+        var socket = io.connect('http://localhost:80');
+        socket.emit('update_dialogs_server');
       }).catch(function (error) {
         console.log(error);
       });
@@ -28208,7 +28250,7 @@ exports.default = function () {
 
 var _userDataActions = require('../actions/userDataActions');
 
-var initialState = { id: 0, nickName: "1", ava: 'http://localhost:81/dist/img/ava1.png' };
+var initialState = { id: 0, nickName: "", ava: 'http://localhost:81/dist/img/ava1.png' };
 
 },{"../actions/userDataActions":286}],293:[function(require,module,exports){
 'use strict';

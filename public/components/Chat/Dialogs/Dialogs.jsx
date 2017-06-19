@@ -9,17 +9,41 @@ class Dialogs extends Component {
       let self = this.props;
     axios.post('/api/get_dialogs')
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         self.dispatch(D.createDialogs(response.data));
       })
       .catch(function (error) {
         console.log(error);
       });
-      
+  
+
+      let socket = io.connect('http://localhost:80');
+      socket.on('update_dialogs_client', () => {
+      // console.log(D);
+    
+
+      // console.log("update_dialogs_client");
+      let self = this.props;
+      axios.post('/api/get_dialogs')
+      .then(function (response) {
+        // console.log(self);
+        // console.log(response.data);
+        self.dispatch(D.createDialogs(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    });
+
+
+
+     
 
 
   }
   render() {
+      // this.props.update();
+      // console.log(this.props);
       this.dialogs_render = this.props.dialogs_mas.map(function(e, i){
           return (<ElementDialogs title={e.title} key={i} id={e.id} />);
       });

@@ -53,6 +53,7 @@
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-oauth": "^2.0.5",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "socket.io": "^2.0.3"
   }
 }

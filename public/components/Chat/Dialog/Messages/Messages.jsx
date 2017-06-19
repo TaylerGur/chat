@@ -22,13 +22,29 @@ class Messages extends Component {
           id : this.props.location.pathname.substring(6)
         })
         .then(function (response) {
+          console.log(response.data);
           self.dispatch(D.createDialog(response.data));
        
         })
         .catch(function (error) {
           console.log(error);
         });
-
+        
+        let socket = io.connect('http://localhost:80');
+        socket.on("update_messages_client", () => {
+            let self = this.props;
+            axios.post('/api/get_dialog', {
+              id : this.props.location.pathname.substring(6)
+            })
+            .then(function (response) {
+              console.log("ssss", response.data)
+              self.dispatch(D.createDialog(response.data));
+           
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        });
       
 
 
