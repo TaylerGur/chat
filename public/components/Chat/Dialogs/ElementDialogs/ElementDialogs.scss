@@ -4,18 +4,8 @@
 	background-color:#f5f5f5;
 	border:1px solid  #a7cfff;
 	border-radius: 2px; 
+	overflow: hidden;
 	
-	&_title{
-		
-		font-size:16px;
-	/*	//color:red;	*/
-
-	}
-	&:hover{
-		color:white;
-		cursor: pointer;
-		background-color:#a7cfff;
-	}
 	a{
 		height: 30px;
 		padding: 5px 10px;
@@ -30,4 +20,26 @@
 			color: white;
 		}
 	}
+
+	&_title{
+		
+		font-size:16px;
+	/*	//color:red;	*/
+
+	}
+	&_active{
+		color:white;
+		cursor: pointer;
+		background-color:#a7cfff;
+		color:white;
+		a{
+			color:white;
+		}
+	}
+	&:hover{
+		color:white;
+		cursor: pointer;
+		background-color:#a7cfff;
+	}
+	
 }

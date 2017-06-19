@@ -142,14 +142,8 @@ body {
   margin: 5px;
   background-color: #f5f5f5;
   border: 1px solid  #a7cfff;
-  border-radius: 2px; }
-  .element_dialogs_title {
-    font-size: 16px;
-    /*	//color:red;	*/ }
-  .element_dialogs:hover {
-    color: white;
-    cursor: pointer;
-    background-color: #a7cfff; }
+  border-radius: 2px;
+  overflow: hidden; }
   .element_dialogs a {
     height: 30px;
     padding: 5px 10px;
@@ -160,6 +154,20 @@ body {
     color: #5d5d5d; }
     .element_dialogs a:hover {
       color: white; }
+  .element_dialogs_title {
+    font-size: 16px;
+    /*	//color:red;	*/ }
+  .element_dialogs_active {
+    color: white;
+    cursor: pointer;
+    background-color: #a7cfff;
+    color: white; }
+    .element_dialogs_active a {
+      color: white; }
+  .element_dialogs:hover {
+    color: white;
+    cursor: pointer;
+    background-color: #a7cfff; }
 
 .message {
   margin: 20px;

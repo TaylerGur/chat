@@ -27495,16 +27495,18 @@ var ElementDialogs = function (_Component) {
   _createClass(ElementDialogs, [{
     key: 'render',
     value: function render() {
-
+      // console.log(this.props.history.location.pathname);
+      this.pathname = this.props.history.location.pathname;
+      this.link = '/chat/' + this.props.id;
       return _react2.default.createElement(
         'div',
         { className: 'element_dialogs' },
         _react2.default.createElement(
           'div',
-          { className: 'element_dialogs_title' },
+          { className: this.pathname == this.link ? "element_dialogs_active" : "element_dialogs_title" },
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/chat/' + this.props.id },
+            { to: this.link },
             this.props.title
           )
         )
@@ -27515,7 +27517,7 @@ var ElementDialogs = function (_Component) {
   return ElementDialogs;
 }(_react.Component);
 
-exports.default = ElementDialogs;
+exports.default = (0, _reactRouterDom.withRouter)(ElementDialogs);
 
 },{"react":253,"react-redux":85,"react-router-dom":102}],278:[function(require,module,exports){
 'use strict';
