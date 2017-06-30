@@ -59,3 +59,4 @@ gulp.task('watchCSS', ['buildCSS'], function(){
 });
  
 gulp.task('default', ['browserSync','watchJS', 'watchCSS']);
+gulp.task('build', ['buildCSS', 'buildJS' ]);
