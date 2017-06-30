@@ -46,7 +46,7 @@ class Auth extends Component {
           </div>
           <div>
             <div className="auth_label">Пароль</div>
-            <input type="text" id="pass_log"/>
+            <input type="password" id="pass_log"/>
           </div>
           <div className="auth_submit"><input type="button" value="Goo!" onClick={()=> this.logIn()}/></div> 
                   
