@@ -34,8 +34,14 @@ A simple chat that works in real time mode
   -  Start the server with the command "node server.js".
   
 ### How it works ###  
-+ #### 1. Authorization
-![alt text](https://github.com/TaylerGur/chat/blob/master/index.png)
+
+- #### 1. Authorization  ####
+![authorization png](https://github.com/TaylerGur/chat/blob/master/index.png)
+> Before you start to communicate you need to be autographed. If this is the first time you register.
+- #### 2. Chat  ####
+> For correspondence, you can choose any existing chat or create a new one. Use the output to change the user.
+
+
 ### Dependencies ###
 
 To run in chats, you need to have you installed [mysql](https://dev.mysql.com/downloads/installer/) (
