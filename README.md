@@ -1,21 +1,26 @@
 # Chat #
 
-Сделан простой чат в режиме реального времени.  
-Чат - создан в рамках обучения себя!!!
 
-### Функционал: ### 
-- авторизация/регистрация 
-- добавление новых чатов
-- переписка в чатах
+A simple chat that works in real time mode
+##### P.S. Sandbox for mastering new development technologies  #####
+
+
+
+### Functional: ### 
+- Authorization
+- Adding new chats
+- Chat conversations
 
 ### Необходиый софт ###
-Для запуска чата вам необходимо, чтобы у вас был установлен [mysql](https://dev.mysql.com/downloads/installer/) (для тех кто впервый раз https://www.youtube.com/watch?v=5XUA3kbNo0s ), и [nodejs](https://nodejs.org/uk/download/).
 
-### Запуск ###
-- перейти в корень диретории с проектом и выполнить команду "npm install" - это установит все зависимости проекта.
-- нужно установить глобально gulp командой - "npm install gulp -g" .
-- импортировать chat.sql из корневой директории проекта в mysql. 
-- изменить файл server.js - внести свой user и password (при установки mysql вы их указывали), name database, может быть и порт если меняли. 
+To run in chats, you need to have you installed [mysql](https://dev.mysql.com/downloads/installer/) (для тех кто делать будет впервые, есть видео -> https://www.youtube.com/watch?v=5XUA3kbNo0s ), and [nodejs](https://nodejs.org/uk/download/).
+
+### Launching ###
+- Go to the root of the project and start the console.
+- Run the command "npm install" - this will establish all the dependencies of the project.
+- Set globally by gulp command- "npm install gulp -g" .
+- import chat.sql from the project's root directory to the mysql database. 
+- Edit file server.js - enter your user и password (when you set mysql, you specified them), name database, can be a port if changed. 
         var options_connect = {
             host: 'localhost',
             port: 3306,
@@ -23,24 +28,21 @@
             password: '1234',
             database: 'chat'
         }
-- Перейти в корень проекта и запустить консоль
-+ Для разработки:
-  - запустить сервер "node server.js"
-  - запустить gulp командой "gulp" 
-+ Для продакшн:
-  - запустить gulp (он соберет весь проект), командой "gulp build"
-  - запустить сервер "node server.js"
++ For development:
+  - Start the server with the command "node server.js"
+  - Run gulp with a command "gulp" 
++ For Production:
+  - Run gulp with a command "gulp build" (He will collect the whole project),
+  -  Start the server with the command "node server.js"
 - играться;)
 
-### Почему сделано именно так?: ###
-Я применил такие технологии: 
-- React - Он "главный виновник" почему я это все начал писать. Оказалось на практике очень удобно компонентами строить проект, как независимыми кирпичиками.
-- Redux - хранитель состояний. Удобнее чем Flux - я про то, что у него один store, но для чата !возможно! не совсем удачная технология. Он задумывался не изменять что-то в данных, которые хранит, а возвращить новое - измененное. Если будет 10000 сообщений - это не лучший подход... Но все равно он крутой)))
-- node.js - теперь js и на сервере;)
-- express - самый документирований и доступный фреймворк на nodejs
-- mysql - самая простая бд)
-- gulp - самый простой таск-менеджер, он у меня: собирает все scss файлы в один в dist/main.css. Сделано для того, чтобы у каждого компонента были свои стили, а значит я мог с легкость и безболезненно применять написанные компоненты и в других проектах. Аналогично и и с js/jsx файлами, они тоже собираются в один файл dist/main.js (быстрее будет один толстый файл, чем +100500 маленьких), так же есть вотчеры, которые при изменении пересоберут проект. И с помощью browser-sync - перезапуститься браузер с новой сборкой!  
-- Socket.io - чтобы чат стал "живим". 
-- scss - удобнее css)
+### Used technology stack: ### 
+- React - view library all project based on it. Thanks to the React, all components are independent bricks, with which it is convenient to build a project.  
+- Redux - all states are stored in one global Store. 
+- node.js - now js and on the server;)
+- express - The most documented and available on nodejs
+- mysql - The most simple database.
+- Socket.io - With him the chat station is "really alive". 
 
-Спасибо;)
+
+Thanks;)
