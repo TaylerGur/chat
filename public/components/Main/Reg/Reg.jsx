@@ -13,6 +13,7 @@ class Reg extends Component {
 		  })
 		  .then(function (response) {
 		    console.log(response);
+		    alert('Вы успешно зарегистрированы! Заходите;)');
 		  })
 		  .catch(function (error) {
 		    console.log(error);
