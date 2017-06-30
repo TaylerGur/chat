@@ -51,9 +51,6 @@ If you've never really set MySQL , there's a video -> https://www.youtube.com/wa
 ### Used technology stack: ### 
 - React - view library all project based on it. Thanks to the React, all components are independent bricks, with which it is convenient to build a project.  
 - Redux - all states are stored in one global Store. 
-- node.js - now js and on the server;)
-- express - The most documented and available on nodejs
-- mysql - The most simple database.
 - Socket.io - With him the chat station is "really alive". 
 
 
