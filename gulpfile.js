@@ -8,7 +8,7 @@ var concat  = require('gulp-concat');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 
-var entries = './public/index.jsx';
+var entries = './src/index.jsx';
 
 gulp.task('browserSync' , function() {
   browserSync({
@@ -40,13 +40,13 @@ gulp.task('buildJS' ,  function () {
 });
  
 gulp.task('watchJS', ['buildJS'], function(){
-    gulp.watch('./public/**/*.jsx', ['buildJS']);
+    gulp.watch('./src/**/*.jsx', ['buildJS']);
 });
 
 
 
 gulp.task('buildCSS' ,  function () {
-    return gulp.src('./public/**/*.scss')
+    return gulp.src('./src/**/*.scss')
         .pipe(sass())
         .pipe(concat('main.css'))
         .pipe(gulp.dest('dist'))
@@ -55,7 +55,7 @@ gulp.task('buildCSS' ,  function () {
 });
 
 gulp.task('watchCSS', ['buildCSS'], function(){
-    gulp.watch('./public/**/*.scss', ['buildCSS']);
+    gulp.watch('./src/**/*.scss', ['buildCSS']);
 });
  
 gulp.task('default', ['browserSync','watchJS', 'watchCSS']);

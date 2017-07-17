@@ -21,9 +21,9 @@ app.use('/dist', express.static('dist'));
 
 var options_connect = {
     host: 'localhost',
-    port: 3306,
+    port: 3307,
     user: 'root',
-    password: '12345',
+    password: '1234',
     database: 'chat'
 }
 var mysql = require('mysql').createConnection(options_connect);
