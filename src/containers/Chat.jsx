@@ -30,6 +30,9 @@ class Chat extends Component {
 	addChat(){
 	    let title = prompt('Название чата:');
 		this.props.dispatch(D.addDialogs('/api/add_dialog', title));
+		let socket = io.connect('http://localhost:80');
+		socket.emit('update_dialogs_server');
+	    //     socket.emit('update_dialogs_server');
 	    // // let self = this.props;
 	    // axios.post('/api/add_dialog', {
 	    //   title: title

@@ -40,6 +40,8 @@ class Dialog extends Component {
   }
   sendMsg(){
   		if(this.props.Value == '') return;
+      let socket = io.connect('http://localhost:80');
+      socket.emit('update_messages_server');
 	  	this.props.dispatch(D.addMessage( '/api/add_message',this.props.location.pathname.substring(6), this.props.User.id, this.props.Value, Date.now(), this.props.User.nickName));
 	    this.props.dispatch(V.changeTextarea(""));
 

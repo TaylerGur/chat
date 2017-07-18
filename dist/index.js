@@ -27606,6 +27606,9 @@ var Chat = function (_Component) {
 		value: function addChat() {
 			var title = prompt('Название чата:');
 			this.props.dispatch(D.addDialogs('/api/add_dialog', title));
+			var socket = io.connect('http://localhost:80');
+			socket.emit('update_dialogs_server');
+			//     socket.emit('update_dialogs_server');
 			// // let self = this.props;
 			// axios.post('/api/add_dialog', {
 			//   title: title
@@ -27748,6 +27751,8 @@ var Dialog = function (_Component) {
     key: 'sendMsg',
     value: function sendMsg() {
       if (this.props.Value == '') return;
+      var socket = io.connect('http://localhost:80');
+      socket.emit('update_messages_server');
       this.props.dispatch(D.addMessage('/api/add_message', this.props.location.pathname.substring(6), this.props.User.id, this.props.Value, Date.now(), this.props.User.nickName));
       this.props.dispatch(V.changeTextarea(""));
     }
