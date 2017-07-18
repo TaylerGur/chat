@@ -27,81 +27,6 @@
   .auth_submit {
     text-align: right; }
 
-* {
-  margin: 0;
-  padding: 0; }
-
-.reg {
-  padding: 15px 15px 5px 15px;
-  border-radius: 2px;
-  border: 1px solid white;
-  margin: 0 auto;
-  width: 224px; }
-  .reg_label {
-    font-family: cursive;
-    width: 70px;
-    display: inline-block;
-    color: white; }
-  .reg input {
-    margin: 5px 0;
-    width: 150px;
-    border: 1px solid #f5f5f5; }
-  .reg input[type='button'] {
-    width: 100px;
-    padding: 3px;
-    border: 1px solid #f5f5f5;
-    background-color: white; }
-  .reg > div {
-    width: 100%; }
-  .reg_submit {
-    text-align: right; }
-
-body {
-  background-color: #a7cfff; }
-
-.main {
-  padding: 50px;
-  width: 700px;
-  margin: 0 auto; }
-  .main h2, .main h4 {
-    font-family: cursive;
-    color: white;
-    text-align: center; }
-  .main .noValid {
-    border: 2px solid red; }
-  .main .valid {
-    border: 1px solid #f5f5f5; }
-
-.NoValidContainer {
-  margin-top: 30px; }
-  .NoValidContainer .NoValidContainer_title {
-    color: red; }
-  .NoValidContainer .NoValidContainer_text {
-    color: black; }
-
-.displayNone {
-  display: none; }
-
-* {
-  margin: 0;
-  padding: 0; }
-
-.chat {
-  /*border: 1px solid red;*/
-  width: 800px;
-  margin: 0 auto;
-  overflow: hidden; }
-  .chat_content {
-    margin-top: 20px;
-    display: flex;
-    height: 550px; }
-
-.dialog {
-  background-color: #f5f5f5;
-  width: 100%;
-  /*border: 1px solid brown;*/
-  height: 100%; }
-
 .dialogs {
   background-color: white;
   width: 250px;
@@ -114,42 +39,6 @@ body {
     text-align: center;
     color: #a7cfff;
     font-size: cursive; }
-
-.menu {
-  padding-top: 10px;
-  /*border:1px solid green;*/
-  position: relative;
-  font-family: cursive;
-  color: white;
-  font-size: 18px; }
-  .menu_exit {
-    position: absolute;
-    right: 20px; }
-    .menu_exit a {
-      color: white;
-      text-decoration: none; }
-  .menu_user {
-    position: absolute;
-    left: 20px; }
-  .menu_add {
-    position: absolute;
-    left: 100px;
-    cursor: pointer; }
-
-.messages {
-  height: 500px;
-  overflow-y: scroll;
-  border-bottom: 1px solid #a7cfff; }
-  .messages_title {
-    width: 145px;
-    margin: 230px auto;
-    font-family: cursive;
-    color: #76777b; }
-
-.sender {
-  display: flex;
-  height: 50px;
-  overflow: hidden; }
 
 .element_dialogs {
   /*height:30px;*/
@@ -183,6 +72,27 @@ body {
     cursor: pointer;
     background-color: #a7cfff; }
 
+.menu {
+  padding-top: 10px;
+  /*border:1px solid green;*/
+  position: relative;
+  font-family: cursive;
+  color: white;
+  font-size: 18px; }
+  .menu_exit {
+    position: absolute;
+    right: 20px; }
+    .menu_exit a {
+      color: white;
+      text-decoration: none; }
+  .menu_user {
+    position: absolute;
+    left: 20px; }
+  .menu_add {
+    position: absolute;
+    left: 100px;
+    cursor: pointer; }
+
 .message {
   margin: 20px;
   padding: 7px;
@@ -213,6 +123,45 @@ body {
 .text_message {
   margin: 0 20px; }
 
+.messages {
+  height: 500px;
+  overflow-y: scroll;
+  border-bottom: 1px solid #a7cfff; }
+  .messages_title {
+    width: 145px;
+    margin: 230px auto;
+    font-family: cursive;
+    color: #76777b; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+.reg {
+  padding: 15px 15px 5px 15px;
+  border-radius: 2px;
+  border: 1px solid white;
+  margin: 0 auto;
+  width: 224px; }
+  .reg_label {
+    font-family: cursive;
+    width: 70px;
+    display: inline-block;
+    color: white; }
+  .reg input {
+    margin: 5px 0;
+    width: 150px;
+    border: 1px solid #f5f5f5; }
+  .reg input[type='button'] {
+    width: 100px;
+    padding: 3px;
+    border: 1px solid #f5f5f5;
+    background-color: white; }
+  .reg > div {
+    width: 100%; }
+  .reg_submit {
+    text-align: right; }
+
 .send_button {
   width: 100%;
   /*display: flex;*/
@@ -234,6 +183,11 @@ body {
     outline: none;
     cursor: pointer; }
 
+.sender {
+  display: flex;
+  height: 50px;
+  overflow: hidden; }
+
 .send_message {
   height: 50px;
   /*width: 90%;*/
@@ -252,3 +206,49 @@ body {
     border: none;
     border-top: 1px solid #a7cfff;
     outline: none; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+.chat {
+  /*border: 1px solid red;*/
+  width: 800px;
+  margin: 0 auto;
+  overflow: hidden; }
+  .chat_content {
+    margin-top: 20px;
+    display: flex;
+    height: 550px; }
+
+.dialog {
+  background-color: #f5f5f5;
+  width: 100%;
+  /*border: 1px solid brown;*/
+  height: 100%; }
+
+body {
+  background-color: #a7cfff; }
+
+.main {
+  padding: 50px;
+  width: 700px;
+  margin: 0 auto; }
+  .main h2, .main h4 {
+    font-family: cursive;
+    color: white;
+    text-align: center; }
+  .main .noValid {
+    border: 2px solid red; }
+  .main .valid {
+    border: 1px solid #f5f5f5; }
+
+.NoValidContainer {
+  margin-top: 30px; }
+  .NoValidContainer .NoValidContainer_title {
+    color: red; }
+  .NoValidContainer .NoValidContainer_text {
+    color: black; }
+
+.displayNone {
+  display: none; }

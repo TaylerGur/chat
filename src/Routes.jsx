@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route , Switch, Link} from 'react-router-dom';
-import Chat from './components/Chat/Chat';
+import Chat from './containers/Chat';
 import Main from './containers/Main';
 
 

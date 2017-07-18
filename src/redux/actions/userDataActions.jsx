@@ -4,33 +4,38 @@ export const EDIT_NICK = 'EDIT_NICK';
 export const EDIT_USER = 'EDIT_USER';
 export const EDIT_ID = 'EDIT_ID';
 export const FAIL = 'FAIL';
-
+export function getSessionUser(url){
+	return (dispatch) => {
+		return axios.post(url)
+			.then((response) => {
+	            if(response.data){
+	               dispatch({type: EDIT_USER, payloads: {nick: response.data.nameUser, id: response.data.id}});
+	            }
+	            else{
+	            	dispatch({type: FAIL , payloads: response});
+	            }
+	          })
+	          .catch(function (error) {
+	            	dispatch({type: FAIL , payloads: error});
+	          });
+	}
+}
 export function editUser(url, log, pass){
 	return (dispatch) => {
 		return axios.post(url, {
 	            nick: log,
 	            pass:  pass
-	    })
+	    	})
 	    	.then((response) => {
 	            if(response.data == 'Ник занят!') {
 	            	dispatch({type: FAIL , payloads: 'Ник занят!'});
-	                // this.setState({ textMsg: 'Логин занят другим пользователем!' });
-	                // this.setState({ failAuthReg: true});
 	            }
 	            if(response.data == 'Пользователь с таким логином и паролем не найден!') {
 	            	dispatch({type: FAIL , payloads: 'Пользователь с таким логином и паролем не найден!'});
-	            
-	                // this.setState({ textMsg: 'Пользователь с таким логином и паролем не найден!' });
-	                // this.setState({ failAuthReg: true});
+
 	            }
 	            if(response.data.nameUser){
-	                // this.setState({ failAuthReg: false});
 	               dispatch({type: EDIT_USER, payloads: {nick: response.data.nameUser, id: response.data.idUser}});
-	                // dispatch(U.editNickName(response.data.nameUser));
-	                // dispatch(U.editId(response.data.idUser));
-	    
-	      
-
 	            }
 	          })
 	          .catch(function (error) {

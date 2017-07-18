@@ -162,7 +162,7 @@ app.post('/api/get_session', jsonParser, function(req, res){
 		res.send({nameUser: req.session.user.nickName, id: req.session.user.id});
 	}
 	else{
-		res.send(false);
+		res.send(true);
 	}
 });
 app.post('/api/get_user', jsonParser, function(req, res){
