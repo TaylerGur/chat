@@ -217,8 +217,25 @@ app.post('/api/add_user', jsonParser, function(req, res){
 		        }
 
 		        if(result){
-		            
-		            res.send('все ок!!');
+		              mysql.query("SELECT * FROM users WHERE nickName='" + req.body.nick + "' AND password='" + req.body.pass + "'", function(err, result,field){
+   
+                                if(err) {
+                                    console.log('%%%%%%%%GET_USER_ERROR%%%%%%%%%');
+                                    
+                                }
+
+                                if(result.length > 0){
+                                    console.log(result[0]);
+                                    req.session.user = result[0];
+                                    res.send({nameUser: req.session.user.nickName, idUser: req.session.user.id, auth: true });
+                                    
+                         
+                                                
+                                }
+                                else{
+                                    res.send('Пользователь с таким логином и паролем не найден!');  
+                                }
+                    });
 		            
 		        }else{
 		            res.send('Что-то пошло не так;(');   
